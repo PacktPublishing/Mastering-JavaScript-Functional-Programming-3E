@@ -2,6 +2,7 @@
 module.exports = {
   arrowParens: "always",
   bracketSpacing: true,
+  printWidth: 60,
   quoteProps: "as-needed",
   semi: true,
   singleQuote: false,
