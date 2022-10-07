@@ -1,6 +1,3 @@
-// QUESTION 1
-// Explanation in text
-
 const makeSaluteClass = (term: string) =>
   class {
     x: string;
