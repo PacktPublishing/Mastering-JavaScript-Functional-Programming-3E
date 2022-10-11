@@ -32,9 +32,12 @@ function newCounter() {
 
 const nc = newCounter();
 
+nc();
+nc();
+
 // Spreads
 
-function sum3(a: number, b: number, c: number) {
+function sum3(a: number, b: number, c: number): number {
   return a + b + c;
 }
 
@@ -54,4 +57,4 @@ const minA = Math.min(...numbers); // 0
 const maxArray = (arr: number[]) => Math.max(...arr);
 const maxA = maxArray(numbers); // 9
 
-export { fact };
+export { fact, fact2, fact3 };
