@@ -13,4 +13,4 @@ const factUp3 = (n: number): number => {
   return factAux();
 };
 
-console.log(factUp(5), factUp2(5), factUp3(5));
+export { factUp, factUp2, factUp3 };

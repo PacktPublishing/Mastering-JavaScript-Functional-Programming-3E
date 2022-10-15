@@ -1,4 +1,5 @@
-// eslint-disable-next-line
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 const onceJS = (fn) => {
   let done = false;
 
