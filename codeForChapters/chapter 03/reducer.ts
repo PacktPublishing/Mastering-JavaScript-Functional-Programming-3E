@@ -79,5 +79,3 @@ function doAction2(state: State, action: Action) {
     ? dispatchTable[action.type](state, action)
     : state;
 }
-
-const a = console.log;
