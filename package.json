@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint",
-    "test": "jest --maxWorkers 1",
+    "test": "jest --maxWorkers 1 --silent --verbose",
     "test:coverage": "nyc jest"
   },
   "repository": {
