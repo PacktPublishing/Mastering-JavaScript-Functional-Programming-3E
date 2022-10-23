@@ -1,7 +1,7 @@
 const shuffle = <T>(arr: T[]): T[] => {
   const len = arr.length;
   for (let i = 0; i < len - 1; i++) {
-    let r = Math.floor(Math.random() * (len - i));
+    const r = Math.floor(Math.random() * (len - i));
     [arr[i], arr[i + r]] = [arr[i + r], arr[i]];
   }
   return arr;

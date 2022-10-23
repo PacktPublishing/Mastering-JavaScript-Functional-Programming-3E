@@ -7,12 +7,12 @@ const getRandomLetter = (): string => {
 };
 
 const getRandomLetter2 = (
-  getRandomInt: () => number = Math.random
+  getRandomNum: () => number = Math.random
 ): string => {
   const min = "A".charCodeAt(0);
   const max = "Z".charCodeAt(0);
   return String.fromCharCode(
-    Math.floor(getRandomInt() * (1 + max - min)) + min
+    Math.floor(getRandomNum() * (1 + max - min)) + min
   );
 };
 
