@@ -2,7 +2,7 @@ const sum3 = (x: number, y: number, z: number): number =>
   x + y + z;
 
 const x = {} as number;
-x.valueOf = Math.random;
+x.valueOf = () => Math.random();
 
 const y = 1;
 const z = 2;

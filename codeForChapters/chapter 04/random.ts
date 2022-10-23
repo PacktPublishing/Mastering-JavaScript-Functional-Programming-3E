@@ -7,7 +7,7 @@ const getRandomLetter = (): string => {
 };
 
 const getRandomLetter2 = (
-  getRandomNum: () => number = Math.random
+  getRandomNum: () => number = Math.random.bind(Math)
 ): string => {
   const min = "A".charCodeAt(0);
   const max = "Z".charCodeAt(0);
