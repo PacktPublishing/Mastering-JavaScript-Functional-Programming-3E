@@ -1,22 +1,4 @@
-type AccumRoundedType = [number, number];
-
-const roundFix2a = (
-  accum: number,
-  n: number
-): AccumRoundedType => {
-  const nRounded = accum > 0 ? Math.ceil(n) : Math.floor(n);
-  accum += n - nRounded;
-  return [accum, nRounded];
-};
-
-const roundFix2b = ([
-  accum,
-  n,
-]: AccumRoundedType): AccumRoundedType => {
-  const nRounded = accum > 0 ? Math.ceil(n) : Math.floor(n);
-  accum += n - nRounded;
-  return [accum, nRounded];
-};
+import { roundFix2a, roundFix2b } from "./question_4.07";
 
 describe("roundFix2a", function () {
   it("rounds 3.14159->3 if differences are 0", () => {
@@ -49,5 +31,3 @@ describe("roundFix2b", function () {
     expect(nRounded).toBe(4);
   });
 });
-
-export { roundFix2a, roundFix2b };
