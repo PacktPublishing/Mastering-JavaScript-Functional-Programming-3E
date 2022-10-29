@@ -2,10 +2,11 @@ import { range } from "./range";
 
 const a = [[1, 2], [3, 4, [5, 6, 7]], 8, [[[9]]]];
 
+/*
 console.log(a.flat()); // or a.flat(1)
 console.log(a.flat(2));
 console.log(a.flat(Infinity));
-
+*/
 /*
 [ 1, 2, 3, 4, [ 5, 6, 7 ], 8, [ [ 9 ] ] ]
 [
@@ -32,8 +33,10 @@ const maxDist2 = distances
   .flat()
   .reduce((p, d) => Math.max(p, d), 0); // also 50
 
+/*
 console.log(maxDist1, maxDist2);
 // 50 50
+*/
 
 ///////////////
 
@@ -101,6 +104,7 @@ const apiAnswer = [
   },
 ];
 
+/*
 console.log(
   apiAnswer
     .map((x) => x.states)
@@ -114,6 +118,7 @@ console.log(
     .flatMap((x) => x.states)
     .flatMap((y) => y.cities)
 );
+*/
 
 ////////////////////
 
@@ -129,51 +134,55 @@ const lastNames = names.flatMap((x) => {
   const s = x.split(" ");
   return s.length === 1 ? [] : s.splice(1);
 });
+/*
 console.log(lastNames);
+*/
 // [ 'Spencer', 'Churchill', 'Lincoln', 'Darwin' ]
 
 ///////////////////
 
 const gettysburg = [
-  "Four score and seven years ago our fathers ",
-  "brought forth, on this continent, a new nation, ",
-  "conceived in liberty, and dedicated to the ",
+  "Four score and seven years ago our fathers",
+  "brought forth, on this continent, a new nation,",
+  "conceived in liberty, and dedicated to the",
   "proposition that all men are created equal.",
-  "Now we are engaged in a great civil war, ",
-  "testing whether that nation, or any nation ",
+  "Now we are engaged in a great civil war,",
+  "testing whether that nation, or any nation",
   "so conceived and so dedicated, can long endure.",
-  "We are met on a great battle field of that ",
-  "war. We have come to dedicate a portion of ",
-  "that field, as a final resting place for ",
-  "those who here gave their lives, that that ",
-  "nation might live. It is altogether ",
+  "We are met on a great battle field of that",
+  "war. We have come to dedicate a portion of",
+  "that field, as a final resting place for",
+  "those who here gave their lives, that that",
+  "nation might live. It is altogether",
   "fitting and proper that we should do this.",
-  "But, in a larger sense, we cannot dedicate, ",
-  "we cannot consecrate,  we cannot hallow, ",
+  "But, in a larger sense, we cannot dedicate,",
+  "we cannot consecrate, we cannot hallow,",
   "this ground.",
-  "The brave men, living and dead, who ",
-  "struggled here, have consecrated  it far ",
+  "The brave men, living and dead, who",
+  "struggled here, have consecrated it far",
   "above our poor power to add or detract.",
-  "The world will little note nor long ",
-  "remember what we say here,  but it can ",
+  "The world will little note nor long",
+  "remember what we say here, but it can",
   "never forget what they did here.",
-  "It is for us the living, rather, to be ",
-  "dedicated here to the unfinished  work ",
-  "which they who fought here have thus far ",
+  "It is for us the living, rather, to be",
+  "dedicated here to the unfinished work",
+  "which they who fought here have thus far",
   "so nobly advanced.",
-  "It is rather for us to be here dedicated ",
-  "to the great task  remaining before us—",
-  "that from these honored dead we take ",
-  "increased devotion to that cause for ",
-  "which they here gave the last full ",
-  "measure of devotion— that we here highly ",
-  "resolve that these dead shall not have ",
-  "died in vain— that this nation, under ",
+  "It is rather for us to be here dedicated",
+  "to the great task remaining before us—",
+  "that from these honored dead we take",
+  "increased devotion to that cause for",
+  "which they here gave the last full",
+  "measure of devotion— that we here highly",
+  "resolve that these dead shall not have",
+  "died in vain— that this nation, under",
   "God, shall have a new birth of freedom-",
-  "and that government of the people, by ",
-  "the people, for the people,  shall not ",
+  "and that government of the people, by",
+  "the people, for the people, shall not",
   "perish from the earth.",
 ];
+
+console.log(gettysburg.map((x) => x.split(" ").length));
 
 console.log(
   gettysburg.flatMap((s: string) => s.split(" ")).length
@@ -190,14 +199,14 @@ const flatAll = (arr: any[]): any[] =>
 
 const flatOne1 = (arr: any[]): any[] => [].concat(...arr);
 
+/*
 console.log("FLAT1 a", a, flatOne1(a));
+*/
 
 const flatOne2 = (arr: any[]): any[] =>
-  arr.reduce((f, v) => f.concat(v), [] as T[]);
+  arr.reduce((f, v) => f.concat(v), [] as any[]);
 
 const flatOne = flatOne2;
-
-export { flatAll, flatOne, flatOne1, flatOne2 };
 
 const flat1 = (arr: any[], n = 1): any[] => {
   if (n === Infinity) {
@@ -220,12 +229,13 @@ const flat2 = (arr: any[], n = 1): any[] =>
 
 const flat = flat1 || flat2;
 
+/*
 console.log(flatAll(a));
-
 console.log(flat(a));
 console.log(flat(a, 1));
 console.log(flat(a, 2));
 console.log(flat(a, Infinity));
+*/
 
 if (!Array.prototype.flat) {
   Array.prototype.flat = function (this, n): any[] {
@@ -238,3 +248,6 @@ if (!Array.prototype.flat) {
     }
   };
 }
+
+export { apiAnswer, gettysburg };
+export { flatAll, flatOne, flatOne1, flatOne2 };

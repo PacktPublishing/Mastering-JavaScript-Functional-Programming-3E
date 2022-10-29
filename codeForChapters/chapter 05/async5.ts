@@ -16,6 +16,7 @@ const filterAsync = <T>(
     arr.filter((v, i) => Boolean(arr2[i]))
   );
 
+/*
 (async () => {
   console.log("START FILTER");
 
@@ -36,4 +37,4 @@ START FILTER
 END FILTER
 */
 
-export {};
+export { filterAsync, fakeFilter, useResult };
