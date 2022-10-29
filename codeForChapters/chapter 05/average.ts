@@ -75,4 +75,4 @@ const averageLat2 = markers.map((x) => x.lat).average();
 const averageLon2 = markers.map((x) => x.lon).average();
 console.log(averageLat2, averageLon2);
 
-export {};
+export { markers };

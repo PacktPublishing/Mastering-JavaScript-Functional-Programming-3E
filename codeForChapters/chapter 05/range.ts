@@ -15,3 +15,5 @@ const ALPHABET = range(
 ).map((x) => String.fromCharCode(x));
 // ["A", "B", "C", ... "X", "Y", "Z"]
 console.log(ALPHABET);
+
+export { range };

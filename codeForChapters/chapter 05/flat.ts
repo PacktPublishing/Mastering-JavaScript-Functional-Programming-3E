@@ -1,3 +1,5 @@
+import { range } from "./range";
+
 const a = [[1, 2], [3, 4, [5, 6, 7]], 8, [[[9]]]];
 
 console.log(a.flat()); // or a.flat(1)
@@ -179,29 +181,25 @@ console.log(
 
 ///////////////
 
-const flatAll = <T>(arr: T[]): T[] =>
+const flatAll = (arr: any[]): any[] =>
   arr.reduce(
-    (f: T[], v: T) =>
+    (f: any[], v: any) =>
       f.concat(Array.isArray(v) ? flatAll(v) : v),
-    [] as T[]
+    []
   );
 
-const flatOne1 = <T>(arr: T[]): T[] =>
-  ([] as T[]).concat(...arr);
+const flatOne1 = (arr: any[]): any[] => [].concat(...arr);
 
 console.log("FLAT1 a", a, flatOne1(a));
 
-const flatOne2 = <T>(arr: T[]): T[] =>
+const flatOne2 = (arr: any[]): any[] =>
   arr.reduce((f, v) => f.concat(v), [] as T[]);
 
 const flatOne = flatOne2;
 
 export { flatAll, flatOne, flatOne1, flatOne2 };
-/*
-const range = (start, stop) =>
-  new Array(stop - start).fill(0).map((v, i) => start + i);
 
-const flat1 = <T>(arr: T[], n = 1): T[] => {
+const flat1 = (arr: any[], n = 1): any[] => {
   if (n === Infinity) {
     return flatAll(arr);
   } else {
@@ -213,14 +211,14 @@ const flat1 = <T>(arr: T[], n = 1): T[] => {
   }
 };
 
-const flat2 = (arr, n = 1) =>
+const flat2 = (arr: any[], n = 1): any[] =>
   n === Infinity
     ? flatAll(arr)
     : n === 1
     ? flatOne(arr)
     : flat2(flatOne(arr), n - 1);
 
-const flat = flat1;
+const flat = flat1 || flat2;
 
 console.log(flatAll(a));
 
@@ -228,4 +226,15 @@ console.log(flat(a));
 console.log(flat(a, 1));
 console.log(flat(a, 2));
 console.log(flat(a, Infinity));
-*/
+
+if (!Array.prototype.flat) {
+  Array.prototype.flat = function (this, n): any[] {
+    if (n === undefined || n === 1) {
+      return flatOne(this as any[]);
+    } else if (n === Infinity) {
+      return flatAll(this as any[]);
+    } else {
+      return flatOne(this as any[]).flat(n - 1);
+    }
+  };
+}

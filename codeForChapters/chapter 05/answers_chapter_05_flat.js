@@ -1,23 +1,3 @@
-if (!Array.prototype.flat) {
-  Array.prototype.flat = function (n = 1) {
-    this.flatAllX = () =>
-      this.reduce(
-        (f, v) =>
-          f.concat(Array.isArray(v) ? v.flat(Infinity) : v),
-        []
-      );
-
-    this.flatOneX = () =>
-      this.reduce((f, v) => f.concat(v), []);
-
-    return n === Infinity
-      ? this.flatAllX()
-      : n === 1
-      ? this.flatOneX()
-      : this.flatOneX().flat(n - 1);
-  };
-}
-
 // SOLUTION TO EXERCISE
 const better = apiAnswer
   .flatMap((c) =>
