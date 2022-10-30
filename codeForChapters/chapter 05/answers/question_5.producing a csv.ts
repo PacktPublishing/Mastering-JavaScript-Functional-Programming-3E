@@ -28,3 +28,5 @@ const makeCSV2 = (data: number[][]) =>
     .reduce((c: string, d: string) => c + "\n" + d, "");
 
 console.log(makeCSV2(myData));
+
+export {};
