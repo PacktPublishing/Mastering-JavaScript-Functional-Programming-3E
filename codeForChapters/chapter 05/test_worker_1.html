@@ -2,25 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Fibonacci Worker Demo</title>
+    <title>Fibonacci</title>
   </head>
   <body>
     Fibonacci:
     <input id="num" type="number" min="0" value="0" />
     <br />
     <br />
-    <button onclick="locally()">Locally</button>
-    <button onclick="parallelly()">Parallelly</button>
+    <button onclick="Calculate">Locally</button>
     <br />
     <br />
     Result: <span id="res"></span>
 
     <script>
-      const worker = new Worker(
-        "http://localhost:8887/test_worker.js"
-      );
-      worker.onmessage = (e) => showResult(e.data);
-
       function fib(n) {
         return n < 2 ? n : fib(n - 2) + fib(n - 1);
       }
@@ -35,10 +29,6 @@
 
       function locally() {
         showResult(fib(getNumber()));
-      }
-
-      function parallelly() {
-        worker.postMessage(getNumber());
       }
     </script>
   </body>

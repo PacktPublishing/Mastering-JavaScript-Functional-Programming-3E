@@ -37,3 +37,8 @@ message event is fired. This is because
 workers can dispatch many message events,
 not just one.
 */
+
+/*
+see https://medium.com/@pilovm/achieve-more-reactivity-with-web-workers-and-queues-dac461ec5f8e --
+this won't work with multiple concurrent calls to the same worker
+*/

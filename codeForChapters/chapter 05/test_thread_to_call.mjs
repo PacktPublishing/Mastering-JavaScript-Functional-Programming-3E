@@ -9,7 +9,10 @@ setTimeout(
 );
 */
 /* por qué no se muere este? */
+/* porque tiene on(...)? */
 
-parentPort.on("message", (x) =>
-  parentPort.postMessage("Hello world!" + x + x + x)
+let x = 100;
+
+parentPort.on("message", (m) =>
+  parentPort.postMessage(`Hello world! ${x++} ${m}`)
 );
