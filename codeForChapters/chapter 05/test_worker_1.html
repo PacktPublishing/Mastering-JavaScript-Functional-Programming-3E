@@ -9,27 +9,11 @@
     <input id="num" type="number" min="0" value="0" />
     <br />
     <br />
-    <button onclick="Calculate">Locally</button>
+    <button onclick="locally()">Locally</button>
     <br />
     <br />
     Result: <span id="res"></span>
 
-    <script>
-      function fib(n) {
-        return n < 2 ? n : fib(n - 2) + fib(n - 1);
-      }
-
-      function getNumber() {
-        return Number(document.getElementById("num").value);
-      }
-
-      function showResult(result) {
-        document.getElementById("res").innerText = result;
-      }
-
-      function locally() {
-        showResult(fib(getNumber()));
-      }
-    </script>
+    <script src="test_worker_1.js"></script>
   </body>
 </html>

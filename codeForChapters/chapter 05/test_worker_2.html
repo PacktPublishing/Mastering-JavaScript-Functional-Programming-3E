@@ -15,31 +15,6 @@
     <br />
     Result: <span id="res"></span>
 
-    <script>
-      function fib(n) {
-        return n < 2 ? n : fib(n - 2) + fib(n - 1);
-      }
-
-      function getNumber() {
-        return Number(document.getElementById("num").value);
-      }
-
-      function showResult(result) {
-        document.getElementById("res").innerText = result;
-      }
-
-      function locally() {
-        showResult(fib(getNumber()));
-      }
-
-      const worker = new Worker(
-        "http://localhost:8887/test_worker.js"
-      );
-      worker.onmessage = (e) => showResult(e.data);
-
-      function parallelly() {
-        worker.postMessage(getNumber());
-      }
-    </script>
+    <script src="test_worker_2.js"></script>
   </body>
 </html>
