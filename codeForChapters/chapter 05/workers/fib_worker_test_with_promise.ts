@@ -1,17 +1,13 @@
 import { Worker } from "worker_threads";
 
-const callWorker = (filename, value) =>
+const callWorker = (filename: string, value: unknown) =>
   new Promise((resolve) => {
     const worker = new Worker(filename);
     worker.on("message", resolve);
     worker.postMessage(value);
-    worker.terminate();
   });
 
 console.log("START");
-const result = await callWorker(
-  "./test_thread_to_call.mjs",
-  40
-);
+const result = await callWorker("./fib_worker.js", 40);
 console.log("AWAITED", result);
 console.log("END");

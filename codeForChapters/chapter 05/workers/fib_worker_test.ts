@@ -1,6 +1,6 @@
 import { Worker } from "worker_threads";
 
-const worker = new Worker("./test_thread_to_call.mjs");
+const worker = new Worker("./fib_worker.js");
 
 console.log("START");
 worker.postMessage(40);

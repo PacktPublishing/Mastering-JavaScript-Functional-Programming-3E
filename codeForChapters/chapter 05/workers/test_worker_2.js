@@ -13,9 +13,9 @@ function locally() {
   showResult(fib(getNumber()));
 }
 var worker = new Worker(
-  "http://localhost:8887/test_worker.js"
+  "http://localhost:8887/test_fib_worker.js"
 );
-worker.onmessage = function (e) {
+worker.onmessage = function (e: MessageEvent<number>) {
   return showResult(e.data);
 };
 /* eslint-disable-next-line */
