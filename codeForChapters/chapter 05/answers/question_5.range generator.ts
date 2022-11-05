@@ -17,6 +17,9 @@ function* range4(
   );
 }
 
+export { range4 };
+
+/*
 const fix1 = (x: number): number => Number(x.toFixed(1));
 
 console.log("2..5", range2(2, 5));
@@ -51,5 +54,4 @@ for (const i of range4(9, 22)) {
   console.log("IN LOOP, EXITING AT 12", i);
   if (i === 12) break;
 }
-
-export {};
+*/

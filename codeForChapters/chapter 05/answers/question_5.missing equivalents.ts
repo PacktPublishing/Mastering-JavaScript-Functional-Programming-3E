@@ -1,5 +1,4 @@
-import { mapAsync, useResult } from "../async4";
-import { fakeFilter } from "../async5";
+import { mapAsync, useResult, fakeFilter } from "../async";
 
 const someAsync = <T>(
   arr: T[],
@@ -24,6 +23,9 @@ const someAsync = <T>(
 
   console.log("END");
 })();
+
+export { someAsync };
+
 /*
 SOME 1
 2022-10-29T14:38:00.193Z true
