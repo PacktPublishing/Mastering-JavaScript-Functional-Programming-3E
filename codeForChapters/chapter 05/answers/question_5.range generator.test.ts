@@ -14,4 +14,12 @@ describe("range4", () => {
     const range = range4(5, 2);
     expect([...range]).toEqual([5, 4, 3, 2]);
   });
+
+  it("generates 1..10 by 2", () => {
+    const numbers = [];
+    for (const i of range4(1, 10, 2)) {
+      numbers.push(i);
+    }
+    expect(numbers).toEqual([1, 3, 5, 7, 9]);
+  });
 });
