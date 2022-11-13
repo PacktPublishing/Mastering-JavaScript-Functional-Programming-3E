@@ -10,6 +10,16 @@ function fib(n: number): number {
   }
 }
 
+/*
+
+const memoize = (fn) => {
+  const cache = {};
+  return (x) =>
+    x in cache ? cache[x] : (cache[x] = fn(x));
+};
+
+*/
+
 const memoize = <T extends (x: number) => any>(
   fn: T
 ): ((x: number) => ReturnType<T>) => {

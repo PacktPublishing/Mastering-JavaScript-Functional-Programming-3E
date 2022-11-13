@@ -1,8 +1,21 @@
+/*
+
+function addLogging(fn) {
+  return (...args) => {
+    console.log(`entering ${fn.name}(${args})`);
+    const valueToReturn = fn(...args);
+    console.log(`exiting  ${fn.name}=>${valueToReturn}`);
+    return valueToReturn;
+  };
+}
+
+*/
+
 // https://spin.atomicobject.com/2019/01/11/typescript-higher-order-functions/
 
 function addLogging<T extends (...args: any[]) => any>(
   fn: T
-): (...funcArgs: Parameters<T>) => ReturnType<T> {
+): (...args: Parameters<T>) => ReturnType<T> {
   return (...args: Parameters<T>): ReturnType<T> => {
     console.log(`entering ${fn.name}(${args})`);
     const valueToReturn = fn(...args);
@@ -39,7 +52,7 @@ exiting  subtract=>2
 
 function addLogging2<T extends (...args: any[]) => any>(
   fn: T
-): (...funcArgs: Parameters<T>) => ReturnType<T> {
+): (...args: Parameters<T>) => ReturnType<T> {
   return (...args: Parameters<T>): ReturnType<T> => {
     console.log(`entering ${fn.name}(${args})`);
     try {

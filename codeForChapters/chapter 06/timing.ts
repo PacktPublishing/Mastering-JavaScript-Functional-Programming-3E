@@ -14,7 +14,7 @@ function addTiming<T extends (...args: any[]) => any>(
     getTime: myGet,
     output: myPut,
   }
-): (...funcArgs: Parameters<T>) => ReturnType<T> {
+): (...args: Parameters<T>) => ReturnType<T> {
   return (...args: Parameters<T>): ReturnType<T> => {
     const tStart = getTime();
     try {
@@ -37,7 +37,7 @@ let changeSign = (a: number): number => -a;
 
 // @ts-expect-error We want to reassign the function
 subtract = addTiming(subtract);
-// subtract(8, 3);
+subtract(8, 3);
 
 console.log(); // to separate
 

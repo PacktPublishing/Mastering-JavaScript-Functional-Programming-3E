@@ -5,7 +5,7 @@ winston.level = "debug";
 function addLogging3<T extends (...args: any[]) => any>(
   fn: T,
   logger = console.log.bind(console)
-): (...funcArgs: Parameters<T>) => ReturnType<T> {
+): (...args: Parameters<T>) => ReturnType<T> {
   return (...args: Parameters<T>): ReturnType<T> => {
     logger(`entering ${fn.name}(${args})`);
     try {
