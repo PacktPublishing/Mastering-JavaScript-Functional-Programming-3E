@@ -92,4 +92,28 @@ const memoize4 = <T extends (...x: any[]) => any>(
   };
 };
 
-export { memoize, memoize2, memoize3, memoize4 };
+const promiseMemoize = <
+  A,
+  T extends (...x: any[]) => Promise<A>
+>(
+  fn: T
+): ((...x: Parameters<T>) => Promise<A>) => {
+  const cache = {} as Record<string, Promise<A>>;
+  return (...args) => {
+    const strX = JSON.stringify(args);
+    return strX in cache
+      ? cache[strX]
+      : (cache[strX] = fn(...args).catch((x) => {
+          delete cache[strX];
+          return x;
+        }));
+  };
+};
+
+export {
+  memoize,
+  memoize2,
+  memoize3,
+  memoize4,
+  promiseMemoize,
+};
