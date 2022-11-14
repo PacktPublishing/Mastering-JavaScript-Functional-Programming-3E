@@ -20,19 +20,6 @@ const average2 = (arr: number[]): number =>
   arr.reduce(sumOrDivide, 0);
 console.log(average2(myArray)); // 27.166667
 
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface Array<T> {
-    average(): number;
-  }
-}
-
-Array.prototype.average = function () {
-  return this.reduce((x, y) => x + y, 0) / this.length;
-};
-const myAvg = [22, 9, 60, 12, 4, 56].average(); // 27.166667
-console.log(myAvg);
-
 const average3 = (arr: number[]): number => {
   const sc = arr.reduce(
     (ac, val) => ({

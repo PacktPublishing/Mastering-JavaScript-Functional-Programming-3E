@@ -36,7 +36,7 @@ describe("a logging function", function () {
 
     thrower = addLogging2(thrower);
 
-    expect(() => thrower()).toThrow();
+    expect(thrower).toThrow();
     expect(global.console.log).toHaveBeenCalledTimes(2);
     expect(global.console.log).toHaveBeenNthCalledWith(
       1,
