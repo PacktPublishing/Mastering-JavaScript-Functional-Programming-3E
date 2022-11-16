@@ -19,21 +19,9 @@ function methodize<
   };
 }
 
-/*
-  EXPLICAR QUE EL 1R PARAMETRO SERÁ SIEMPRE EL OBJETO
-  SOBRE EL CUAL TRABAJAR... LA STRING PARA REVERSE(),
-  EL ARRAY PARA AVERAGE()
-
-  la función también tiene que tener nombre... algo de
-  esto ya mencioné en el capítulo 1, creo...
-
-  CUANDO LA LLAME COMO METODO, NO VOY A PASAR EL 1r ARG
-  CUANDO LA LLAMO COMO FUNC, SIEMPRE PASO EL 1r ARG
-*/
-
 declare global {
   interface String {
-    reverse(y?: number): string;
+    reverse(y?: boolean): string;
   }
 }
 
@@ -45,19 +33,23 @@ function reverse(x: string, y = false): string {
 }
 
 methodize(String, reverse);
-/* The previous is equivalent to:
 
-String.prototype.reverse = function (this: string, y=""): string {
+/* The previous is equivalent to:
+String.prototype.reverse = function (
+  this: string,
+  y
+): string {
   return reverse(this, y);
 };
 */
+
 console.log("MONTEVIDEO".reverse());
-console.log("MONTEVIDEO".reverse(22));
+console.log("MONTEVIDEO".reverse(true));
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // esl int-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
-    average(this: number[]): number;
+    average(this: Array<number>): number;
   }
 }
 
@@ -67,11 +59,7 @@ function average(x: number[]): number {
   );
 }
 methodize(Array, average);
-/*
-Array.prototype.average = function (this: number[]) {
-  return average(this);
-};
-*/
+
 const myAvg = [22, 9, 60, 12, 4, 56].average(); // 27.166667
 console.log(myAvg);
 
