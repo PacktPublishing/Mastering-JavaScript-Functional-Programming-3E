@@ -35,12 +35,10 @@ function reverse(x: string, y = false): string {
 methodize(String, reverse);
 
 /* The previous is equivalent to:
-String.prototype.reverse = function (
-  this: string,
-  y
-): string {
-  return reverse(this, y);
-};
+String.prototype.reverse =
+  function (this: string, y): string {
+    return reverse(this, y);
+  };
 */
 
 console.log("MONTEVIDEO".reverse());
