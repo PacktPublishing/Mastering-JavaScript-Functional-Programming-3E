@@ -25,16 +25,21 @@ function addLogging<T extends (...args: any[]) => any>(
 }
 
 function subtract(a: number, b: number): number {
-  b = changeSign(b);
-  return a + b;
+  if (b === 0) {
+    throw new Error("We don't subtract zero!");
+  } else {
+    b = changeSign(b);
+    return a + b;
+  }
 }
 
 let changeSign = (a: number): number => -a;
 
+/*
 // @ts-expect-error We want to reassign the function
 subtract = addLogging(subtract);
 subtract(8, 3);
-
+*/
 console.log(); // to separate
 
 changeSign = addLogging(changeSign);
@@ -68,20 +73,16 @@ function addLogging2<T extends (...args: any[]) => any>(
   };
 }
 
-/*
-const errorFunc = (n: number) => {
-  throw new Error(`I won't work with ${n}!`);
-};
+const subtract2 = addLogging2(subtract);
 
 try {
-  addLogging2(errorFunc)(22);
+  subtract2(11, 0);
 } catch (e) {
-  console.log("Got an error");
+  /* nothing */
 }
-
-entering errorFunc(22)
-exiting  errorFunc=>threw Error: I won't work with 22!
-Got an error
+/*
+entering subtract(11,0)
+exiting  subtract=>threw Error: We don't subtract zero!
 */
 
 export { addLogging2 };
