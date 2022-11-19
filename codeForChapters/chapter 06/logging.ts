@@ -85,4 +85,4 @@ entering subtract(11,0)
 exiting  subtract=>threw Error: We don't subtract zero!
 */
 
-export { addLogging2 };
+export { addLogging2, subtract };

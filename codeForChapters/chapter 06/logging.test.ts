@@ -1,4 +1,4 @@
-import { addLogging2 } from "./logging";
+import { addLogging2, subtract } from "./logging";
 
 describe("a logging function", function () {
   afterEach(() => {
@@ -30,21 +30,18 @@ describe("a logging function", function () {
   it("should report a thrown exception", () => {
     jest.spyOn(global.console, "log");
 
-    let thrower = () => {
-      throw "CRASH!";
-    };
+    let subtractZero = (x: number) => subtract(x, 0);
+    subtractZero = addLogging2(subtractZero);
 
-    thrower = addLogging2(thrower);
-
-    expect(thrower).toThrow();
+    expect(() => subtractZero(10)).toThrow();
     expect(global.console.log).toHaveBeenCalledTimes(2);
     expect(global.console.log).toHaveBeenNthCalledWith(
       1,
-      "entering thrower()"
+      "entering subtractZero(10)"
     );
     expect(global.console.log).toHaveBeenNthCalledWith(
       2,
-      "exiting  thrower=>threw CRASH!"
+      "exiting  subtractZero=>threw Error: We don't subtract zero!"
     );
   });
 });

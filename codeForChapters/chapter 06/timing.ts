@@ -1,4 +1,4 @@
-const myGet: () => number = () => performance.now();
+const myGet = (): number => performance.now();
 
 const myPut = (
   text: string,
