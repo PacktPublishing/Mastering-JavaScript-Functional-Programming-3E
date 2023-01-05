@@ -21,6 +21,7 @@
   "homepage": "https://github.com/PacktPublishing/Mastering-JavaScript-Functional-Programming-3E#readme",
   "devDependencies": {
     "@babel/core": "^7.19.3",
+    "@babel/plugin-proposal-pipeline-operator": "^7.18.9",
     "@babel/preset-env": "^7.19.3",
     "@babel/preset-typescript": "^7.18.6",
     "@types/jest": "^29.1.1",

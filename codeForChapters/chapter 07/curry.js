@@ -18,22 +18,22 @@ const f3 = f2(2);
 // "A2Z" will be now calculated, since we are providing
 // the 3rd (last) make3's parameter
 const f4 = f3("Z");
-console.log(f4);
+// console.log(f4);
 
-console.log("TEST!!");
+// console.log("TEST!!");
 
 const f2b = f1("TEA")(4);
 const f3b = f2b("TWO");
-console.log(f3b);
+// console.log(f3b);
 
 const f1c = f1("IN")(10)("TION");
-console.log(f1c);
+// console.log(f1c);
 
 const step1 = make3.bind(null, "A");
 const step2 = step1.bind(null, 2);
 const step3 = step2.bind(null, "Z");
 
-console.log(step3()); // "A:2:Z"
+// console.log(step3()); // "A:2:Z"
 
 function curry2(fn, len) {
   return len === 0
@@ -49,4 +49,4 @@ sum2(1, 5, 3, 7); // 16
 sum2(1, 5, 3, 7, 4); // 20
 
 const curriedSum5 = curry2(sum2, 5); // curriedSum5 will expect 5 parameters
-console.log(curriedSum5(1)(5)(3)(7)(4)); // 20
+// console.log(curriedSum5(1)(5)(3)(7)(4)); // 20

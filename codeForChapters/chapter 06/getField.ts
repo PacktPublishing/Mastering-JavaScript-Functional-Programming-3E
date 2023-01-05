@@ -31,7 +31,7 @@ const markers = [
 
 const averageLat = average(markers.map((x) => x.lat));
 const averageLon = average(markers.map((x) => x.lon));
-console.log(averageLat, averageLon); // -15.76, -65.53
+// console.log(averageLat, averageLon); // -15.76, -65.53
 
 type NumFn = (...args: any[]) => number;
 
@@ -41,7 +41,7 @@ const averageLat2 = average(
 const averageLon2 = average(
   markers.map(getField("lon") as NumFn)
 );
-console.log(averageLat2, averageLon2);
+// console.log(averageLat2, averageLon2);
 
 const serviceResult = {
   accountsData: [
@@ -58,6 +58,6 @@ const delinquent = serviceResult.accountsData.filter(
   (v) => v.balance < 0
 );
 const delinquentIds = delinquent.map(getId);
-console.log(delinquentIds);
+// console.log(delinquentIds);
 
 export { getField };

@@ -1,19 +1,17 @@
-/*
 const demethodize1 =
-  (fn) =>
-  (arg0, ...args) =>
+  (fn: (...args: any[]) => any) =>
+  (arg0: any, ...args: any[]) =>
     fn.apply(arg0, args);
 
 const demethodize2 =
-  (fn) =>
-  (arg0, ...args) =>
+  (fn: (...args: any[]) => any) =>
+  (arg0: any, ...args: any[]) =>
     fn.call(arg0, ...args);
 
 const demethodize3 =
-  (fn) =>
-  (...args) =>
+  (fn: (...args: any[]) => any) =>
+  (...args: any[]) =>
     fn.bind(...args)();
-*/
 
 const sort = demethodize1(Array.prototype.sort);
 const a = ["delta", "alfa", "beta", "gamma", "epsilon"];
@@ -49,3 +47,6 @@ const strings2 = map(numbers, toLocaleString);
 console.log(strings2);
 
 export { demethodize1, demethodize2, demethodize3 };
+
+const demethodize = demethodize1;
+export { demethodize };
