@@ -30,6 +30,10 @@ function isOdd8(n: number): boolean {
   return n >> 1 === (n - 1) >> 1;
 }
 
+function isOdd9(n: number): boolean {
+  return "13579".includes(String(n).at(-1)!);
+}
+
 console.log(isOdd1(22)); // false
 console.log(isOdd1(9)); // true
 
@@ -53,3 +57,6 @@ console.log(isOdd7(9)); // true
 
 console.log(isOdd8(22)); // false
 console.log(isOdd8(9)); // true
+
+console.log(isOdd9(22)); // false
+console.log(isOdd9(9)); // true
