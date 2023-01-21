@@ -1,4 +1,4 @@
-import { roundFix2a, roundFix2b } from "./question_4.07";
+import { roundFix2a, roundFix2b } from "./question_04_tuples_to_go";
 
 describe("roundFix2a", function () {
   it("rounds 3.14159->3 if differences are 0", () => {

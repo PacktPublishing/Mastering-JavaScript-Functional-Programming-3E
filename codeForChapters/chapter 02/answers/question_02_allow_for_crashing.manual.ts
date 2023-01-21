@@ -1,4 +1,4 @@
-import { onceIfSuccess } from "./question_2.4";
+import { onceIfSuccess } from "./question_02_allow_for_crashing";
 
 let count = 0;
 

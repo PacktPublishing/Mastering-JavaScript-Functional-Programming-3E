@@ -1,4 +1,4 @@
-import { carefulFact } from "./question_1.4";
+import { carefulFact } from "./question_01_factorial_errors";
 
 describe("Correct cases", () => {
   test("5! = 120", () => expect(carefulFact(5)).toBe(120));

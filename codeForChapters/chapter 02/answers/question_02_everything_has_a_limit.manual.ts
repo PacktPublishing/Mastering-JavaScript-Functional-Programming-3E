@@ -1,4 +1,4 @@
-import { thisManyTimes } from "./question_2.3";
+import { thisManyTimes } from "./question_02_everything_has_a_limit";
 
 const squeak = (a: string) => console.log(a, "squeak!!");
 

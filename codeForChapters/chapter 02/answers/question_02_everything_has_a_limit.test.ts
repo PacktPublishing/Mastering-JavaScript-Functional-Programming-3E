@@ -1,4 +1,4 @@
-import { thisManyTimes } from "./question_2.3";
+import { thisManyTimes } from "./question_02_everything_has_a_limit";
 
 describe("thisManyTimes", () => {
   it("calls the function 2 times, nothing after", () => {

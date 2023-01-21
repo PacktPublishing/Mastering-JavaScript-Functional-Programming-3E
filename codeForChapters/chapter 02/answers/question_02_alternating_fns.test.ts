@@ -1,4 +1,4 @@
-import { alternator } from "./question_2.2";
+import { alternator } from "./question_02_alternating_fns";
 
 describe("alternator", () => {
   it("calls the two functions alternatively", () => {
