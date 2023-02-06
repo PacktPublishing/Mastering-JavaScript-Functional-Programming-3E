@@ -1,4 +1,4 @@
-type FN = (...args: any[]) => any;
+import type { FN } from "../common";
 
 function detectTCO() {
   const outerStackLen = new Error().stack!.length;

@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>Cities search</title>
+    <script type="text/javascript" src="rxjs.umd.js"></script>
+  </head>
+  <body>
+    <br />
+    <br />
+    Find cities:
+    <input type="text" id="myText" />
+    <br />
+    <h4>Some cities...</h4>
+    <div id="myResults"></div>
+
+    <script>
+      const { from, fromEvent, of, pipe, range } = rxjs;
+      const {
+        buffer,
+        debounceTime,
+        distinctUntilChanged,
+        filter,
+        map,
+        reduce,
+        switchMap,
+        take
+      } = rxjs.operators;
+
+      const getCitiesOrNull = text => {
+        if (text) {
+          const citySearch =
+            `http://geodb-free-service.wirefreethought.com/v1/geo/cities?` +
+            `hateoasMode=false&` +
+            `sort=-population&` +
+            `namePrefix=${encodeURIComponent(text)}`;
+          return fetch(citySearch);
+        } else {
+          return Promise.resolve(null);
+        }
+      };
+
+      const textInput$ = fromEvent(
+        document.getElementById("myText"),
+        "input"
+      ).pipe(
+        map(e => e.target.value),
+        debounceTime(200),
+        filter(w => w.length === 0 || w.length > 3),
+        distinctUntilChanged(),
+        switchMap(w => getCitiesOrNull(w))
+      );
+
+      textInput$.subscribe(async fetchResult => {
+        domElem = document.getElementById("myResults");
+        if (fetchResult !== null) {
+          result = await fetchResult.json();
+          domElem.innerHTML = result.data
+            .map(x => `${x.city}, ${x.region}, ${x.country}`)
+            .join("<br />");
+        } else {
+          domElem.innerHTML = "";
+        }
+      });
+    </script>
+  </body>
+</html>

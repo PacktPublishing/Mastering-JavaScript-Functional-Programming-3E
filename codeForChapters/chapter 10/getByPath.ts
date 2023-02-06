@@ -1,47 +1,16 @@
 import { deepCopy } from "./deepCopy";
+import { deepFreeze } from "./deepFreeze";
 
-type Curry<P, R> = P extends []
-  ? R
-  : P extends [infer H]
-  ? (arg: H) => R // only 1 arg
-  : P extends [infer H, ...infer T] // 2 or more args
-  ? (arg: H) => Curry<[...T], R>
-  : never;
-
-function curry<A extends any[], R>(
-  fn: (...args: A) => R
-): Curry<A, R>;
-function curry(fn: (...args: any) => any) {
-  return fn.length === 0
-    ? fn()
-    : (x: any) => curry(fn.bind(null, x));
-}
-
-const deepFreeze = <A extends { [key: string]: any }>(
-  obj: A
-): A => {
-  if (
-    obj &&
-    typeof obj === "object" &&
-    !Object.isFrozen(obj)
-  ) {
-    Object.freeze(obj);
-    Object.getOwnPropertyNames(obj).forEach((prop) =>
-      deepFreeze(obj[prop])
-    );
-  }
-
-  return obj;
-};
+import type { OBJ } from "../common";
 
 const getField =
-  <D extends { [key: string]: any }>(f: keyof D) =>
-  (obj: D) =>
+  <O extends OBJ>(f: keyof O) =>
+  (obj: O) =>
     obj[f];
 
-const getByPath = <D extends { [key: string]: any }>(
+const getByPath = <O extends OBJ>(
   arr: string[],
-  obj: D
+  obj: O
 ): any => {
   if (arr[0] in obj) {
     return arr.length > 1

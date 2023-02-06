@@ -2,6 +2,8 @@ import { addLogging } from "../chapter 06/logging";
 import { pipeline, pipeline2, pipeline3 } from "./pipeline";
 import { getDir, filterOdt, count } from "./pipeline";
 
+import type { FN } from "../common";
+
 type Curry<P, R> = P extends []
   ? R
   : P extends [infer H]
@@ -18,8 +20,6 @@ function curry(fn: (...args: any) => any) {
     ? fn()
     : (x: any) => curry(fn.bind(null, x));
 }
-
-type FN = (...args: any[]) => any;
 
 const tee = <A>(arg: A) => {
   console.log(arg);

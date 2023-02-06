@@ -1,6 +1,6 @@
 import { compose } from "./compose";
 
-type FN = (...args: any[]) => any;
+import type { FN } from "../common";
 /*
 const testOdd = (x: number): boolean => x % 2 === 1;
 const testUnderFifty = (x: number): boolean => x < 50;

@@ -1,5 +1,6 @@
 import { curry } from "../chapter 07/curry.fn";
 import fs from "fs";
+import type { FN } from "../common";
 
 function getDir(path: string) {
   const files = fs.readdirSync(path);
@@ -54,8 +55,6 @@ const countOdtFiles4 = (path: string): number =>
 const c4 = countOdtFiles4("/home/fkereki/Documents");
 // 4, again
 // console.log(c4);
-
-type FN = (...args: any[]) => any;
 
 type FnsMatchPipe<FNS extends FN[]> =
   1 extends FNS["length"]

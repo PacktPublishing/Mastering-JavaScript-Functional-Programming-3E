@@ -1,40 +1,13 @@
-const deepCopy = <A extends { [key: string]: any }>(
-  obj: A
-): A => {
-  let aux: A = obj;
-  if (obj && typeof obj === "object") {
-    aux = new (obj as any).constructor(); // TS hack!
+import { deepCopy } from "./deepCopy";
+import { deepFreeze } from "./deepFreeze";
 
-    Object.getOwnPropertyNames(obj).forEach((prop) => {
-      aux[prop as keyof A] = deepCopy(obj[prop]);
-    });
-  }
+import type { OBJ } from "../common";
 
-  return aux;
-};
-
-const deepFreeze = <A extends { [key: string]: any }>(
-  obj: A
-): A => {
-  if (
-    obj &&
-    typeof obj === "object" &&
-    !Object.isFrozen(obj)
-  ) {
-    Object.freeze(obj);
-    Object.getOwnPropertyNames(obj).forEach((prop) =>
-      deepFreeze(obj[prop])
-    );
-  }
-
-  return obj;
-};
-
-const setByPath = <A extends { [key: string]: any }>(
+const setByPath = <O extends OBJ>(
   arr: string[],
   value: any,
-  obj: A
-): A => {
+  obj: O
+): O => {
   if (!(arr[0] in obj)) {
     // TS objects to obj[arr[0]]=...
 
@@ -62,14 +35,14 @@ const setByPath = <A extends { [key: string]: any }>(
   if (arr.length > 1) {
     return setByPath(arr.slice(1), value, obj[arr[0]]);
   } else {
-    obj[arr[0] as keyof A] = value;
+    obj[arr[0] as keyof O] = value;
     return obj;
   }
 };
 
-const updateObject = <A extends { [key: string]: any }>(
+const updateObject = <O extends OBJ>(
   arr: string[],
-  obj: A,
+  obj: O,
   value: any
 ) => {
   const newObj = deepCopy(obj);

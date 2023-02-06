@@ -1,4 +1,4 @@
-type FN = (...args: any[]) => any;
+import type { FN } from "../common";
 
 const pipeTwo =
   <F extends FN, G extends FN>(f: F, g: G) =>

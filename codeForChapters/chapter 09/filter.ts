@@ -1,12 +1,12 @@
 /* eslint-disable no-sparse-arrays */
 
-type Opt<X> = X | undefined;
+import type { OPT } from "../common";
 
 const filterR = <A>(
-  orig: Opt<A>[],
-  cb: (x: A, i: number, a: Opt<A>[]) => boolean
+  orig: OPT<A>[],
+  cb: (x: A, i: number, a: OPT<A>[]) => boolean
 ): A[] => {
-  const filterLoop = (arr: Opt<A>[], i: number): A[] =>
+  const filterLoop = (arr: OPT<A>[], i: number): A[] =>
     arr.length == 0
       ? []
       : !(0 in arr) ||

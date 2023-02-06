@@ -1,3 +1,5 @@
+import type { OBJ } from "../common";
+
 const oldObject = {
   d: 22,
   m: 9,
@@ -33,27 +35,24 @@ console.log(newObject2);
 console.log(oldObject);
 // {d:22, m:9, o: {c:"MVD", i:"UY", f: {a:9999}}} -- oops!!
 
-const jsonCopy = <A extends { [key: string]: any }>(
-  obj: A
-): A => JSON.parse(JSON.stringify(obj));
+const jsonCopy = <O extends OBJ>(obj: O): O =>
+  JSON.parse(JSON.stringify(obj));
 
 const myDate = new Date();
 const newDate = jsonCopy(myDate);
 console.log(typeof myDate, typeof newDate); // object string
 
-const deepCopy = <A extends { [key: string]: any }>(
-  obj: A
-): A => {
-  let aux: A = obj;
+const deepCopy = <O extends OBJ>(obj: O): O => {
+  let aux: O = obj;
   if (obj && typeof obj === "object") {
     aux = new (obj as any).constructor(); // TS hack!
 
     Object.getOwnPropertyNames(obj).forEach((prop) => {
-      aux[prop as keyof A] = deepCopy(obj[prop]);
+      aux[prop as keyof O] = deepCopy(obj[prop]);
     });
   }
 
   return aux;
 };
 
-export { deepCopy };
+export { deepCopy, jsonCopy };

@@ -1,3 +1,5 @@
+import type { OBJ } from "../common";
+
 const myObj = { d: 22, m: 9 };
 console.log(myObj);
 
@@ -37,9 +39,7 @@ myObj3.d = 8888; // wont' work, as earlier
 myObj3.o.f.a = 9999; // oops, does work!!
 console.log(myObj3); // {d:22, m:9, o:{c:"MVD", i:"UY", f:{ a:9999 }}}
 
-const deepFreeze = <A extends { [key: string]: any }>(
-  obj: A
-): A => {
+const deepFreeze = <O extends OBJ>(obj: O): O => {
   if (
     obj &&
     typeof obj === "object" &&

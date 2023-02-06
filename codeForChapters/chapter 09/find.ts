@@ -1,11 +1,11 @@
 /* eslint-disable no-sparse-arrays */
 
-type Opt<X> = X | undefined;
+import type { OPT } from "../common";
 
 const findR = <A>(
   arr: A[],
   cb: (x: A) => boolean
-): Opt<A> =>
+): OPT<A> =>
   arr.length === 0
     ? undefined
     : cb(arr[0])

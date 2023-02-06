@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <title>Example #01</title>
+    <script
+      type="text/javascript"
+      src="rxjs.umd.js"
+    ></script>
+  </head>
+  <body>
+    <button id="myBtn">My button</button>
+    <br />
+    <br />
+    <span id="mySpan"
+      >Click this text many times (quickly)</span
+    >
+    <br />
+    <br />
+    Find cities:
+    <input type="text" id="myText" />
+    <br />
+    <h4>Some cities...</h4>
+    <div id="myResults"></div>
+
+    <script>
+      const { from, fromEvent, of, pipe, range } = rxjs;
+      const {
+        buffer,
+        debounceTime,
+        distinctUntilChanged,
+        filter,
+        map,
+        reduce,
+        switchMap,
+        take,
+      } = rxjs.operators;
+
+      /*
+        BASIC EXAMPLES OF CREATION, PLUS COMMON OPERATORS
+      */
+
+      const obs1$ = from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+      const obs2$ = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+      const obs3$ = range(1, 10);
+
+      obs1$.subscribe(console.log);
+      /*
+        1 2 3 4 5 6 7 8 9 10
+      */
+
+      range(1, 100)
+        .pipe(
+          filter((x) => x % 2),
+          take(5),
+          map((x) => x * 10),
+          reduce((acc, val) => acc + val, 0)
+        )
+        .subscribe(console.log);
+      /*
+        250
+      */
+
+      /*
+        EXAMPLE
+        Monitor clicks
+      */
+      const myButton = document.getElementById("myBtn");
+      const btnClick$ = fromEvent(myButton, "click");
+
+      const subbtn = btnClick$.subscribe((e) =>
+        console.log("1st subscription", new Date())
+      );
+
+      const subbtnOnlyThreeTimes = btnClick$
+        .pipe(take(3))
+        .subscribe((e) =>
+          console.log("2nd subscription", new Date())
+        );
+      /*
+        1st subscription Sun Nov 10 2019 14:02:38 GMT-0300 (Uruguay Standard Time)
+        2nd subscription Sun Nov 10 2019 14:02:38 GMT-0300 (Uruguay Standard Time)
+        1st subscription Sun Nov 10 2019 14:02:39 GMT-0300 (Uruguay Standard Time)
+        2nd subscription Sun Nov 10 2019 14:02:39 GMT-0300 (Uruguay Standard Time)
+        1st subscription Sun Nov 10 2019 14:02:39 GMT-0300 (Uruguay Standard Time)
+        2nd subscription Sun Nov 10 2019 14:02:39 GMT-0300 (Uruguay Standard Time)
+        1st subscription Sun Nov 10 2019 14:02:40 GMT-0300 (Uruguay Standard Time)
+        1st subscription Sun Nov 10 2019 14:02:40 GMT-0300 (Uruguay Standard Time)
+        1st subscription Sun Nov 10 2019 14:02:41 GMT-0300 (Uruguay Standard Time)
+        1st subscription Sun Nov 10 2019 14:02:41 GMT-0300 (Uruguay Standard Time)
+      */
+
+      /*
+        EXAMPLE
+        Detect triple clicks
+      */
+      const spanClick$ = fromEvent(
+        document.getElementById("mySpan"),
+        "click"
+      );
+
+      spanClick$
+        .pipe(
+          buffer(spanClick$.pipe(debounceTime(250))),
+          map((list) => list.length),
+          filter((x) => x >= 3)
+        )
+        .subscribe((e) => {
+          console.log(`${e} clicks at ${new Date()}`);
+        });
+      /*
+  4 clicks at Mon Nov 11 2019 20:19:29 GMT-0300 (Uruguay Standard Time)
+  3 clicks at Mon Nov 11 2019 20:19:29 GMT-0300 (Uruguay Standard Time)
+  4 clicks at Mon Nov 11 2019 20:19:31 GMT-0300 (Uruguay Standard Time)
+*/
+
+      /*
+              EXAMPLE
+              Find cities using GEODB CITIES API
+              at http://geodb-cities-api.wirefreethought.com/
+            */
+
+      const getCitiesOrNull = (text) => {
+        if (text) {
+          const citySearchUrl =
+            `http://geodb-free-service.wirefreethought.com/v1/geo/cities?` +
+            `hateoasMode=false&` +
+            `sort=-population&` +
+            `namePrefix=${encodeURIComponent(text)}`;
+          return fetch(citySearchUrl);
+        } else {
+          return Promise.resolve(null);
+        }
+      };
+
+      const textInput$ = fromEvent(
+        document.getElementById("myText"),
+        "input"
+      ).pipe(
+        map((e) => e.target.value),
+        debounceTime(200),
+        filter((w) => w.length === 0 || w.length > 3),
+        distinctUntilChanged(),
+        switchMap((w) => getCitiesOrNull(w))
+      );
+
+      textInput$.subscribe(async (fetchResult) => {
+        domElem = document.getElementById("myResults");
+        if (fetchResult !== null) {
+          result = await fetchResult.json();
+          domElem.innerHTML = result.data
+            .map(
+              (x) => `${x.city}, ${x.region}, ${x.country}`
+            )
+            .join("<br />");
+        } else {
+          domElem.innerHTML = "";
+        }
+      });
+    </script>
+  </body>
+</html>

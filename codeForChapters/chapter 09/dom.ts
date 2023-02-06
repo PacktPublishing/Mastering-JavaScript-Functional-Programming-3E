@@ -1,4 +1,4 @@
-type FN = (...args: any[]) => any;
+import type { FN } from "../common";
 
 const traverseDom = (node: Element, depth = 0) => {
   console.log(

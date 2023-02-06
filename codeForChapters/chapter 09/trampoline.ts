@@ -1,4 +1,4 @@
-type FN = (...args: any[]) => any;
+import type { FN } from "../common";
 
 const getIsoDT = () => new Date().toISOString(); // a thunk
 const isoDT = getIsoDT(); // getting the thunk's value

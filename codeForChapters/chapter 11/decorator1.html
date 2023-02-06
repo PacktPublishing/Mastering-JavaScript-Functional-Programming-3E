@@ -1,0 +1,27 @@
+import { StrictMode } from "react"; import { createRoot }
+from "react-dom/client"; const FullNameDisplay = ({ first,
+last }) => { return (
+<div>
+  First Name: <b>{first}</b>
+  <br />
+  Last Name: <b>{last}</b>
+</div>
+); }; const ListOfNames = ({ people, heading }) => { return
+(
+<div>
+  <h1>{heading}</h1>
+  <ul>
+    {people.map((v) => (
+    <FullNameDisplay first="{v.first}" last="{v.last}" />
+    ))}
+  </ul>
+</div>
+); }; const GANG_OF_FOUR = [ { first: "Erich", last: "Gamma"
+}, { first: "Richard", last: "Helm" }, { first: "Ralph",
+last: "Johnson" }, { first: "John", last: "Vlissides" } ];
+const rootElement = document.getElementById("root"); const
+root = createRoot(rootElement); root.render(
+<StrictMode>
+  <ListOfNames people="{GANG_OF_FOUR}" heading="GoF" />
+</StrictMode>
+);

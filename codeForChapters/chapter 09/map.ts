@@ -1,5 +1,7 @@
 /* eslint-disable no-sparse-arrays */
 
+import type { OPT } from "../common";
+
 const mapR = <A, B>(arr: A[], cb: (x: A) => B): B[] =>
   arr.length === 0
     ? []
@@ -56,20 +58,18 @@ console.log(mapR3(aaa, senseless)); // [10.1, 21.2, 42.4, 53.5, 74.7]
 console.log([1, 2, , , 5].map(timesTen));
 // [10, 20, undefined × 2, 50]
 
-type Opt<X> = X | undefined;
-
 const mapR4 = <A, B>(
-  orig: Opt<A>[],
-  cb: (x: A, i: number, a: Opt<A>[]) => B
-): Opt<B>[] => {
-  const mapLoop = (arr: Opt<A>[], i: number): Opt<B>[] =>
+  orig: OPT<A>[],
+  cb: (x: A, i: number, a: OPT<A>[]) => B
+): OPT<B>[] => {
+  const mapLoop = (arr: OPT<A>[], i: number): OPT<B>[] =>
     arr.length == 0
       ? []
       : !(0 in arr) || arr[0] === undefined
-      ? ([,] as Opt<B>[]).concat(
+      ? ([,] as OPT<B>[]).concat(
           mapLoop(arr.slice(1), i + 1)
         )
-      : ([cb(arr[0] as A, i, orig)] as Opt<B>[]).concat(
+      : ([cb(arr[0] as A, i, orig)] as OPT<B>[]).concat(
           mapLoop(arr.slice(1), i + 1)
         );
 

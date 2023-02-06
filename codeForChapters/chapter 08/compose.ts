@@ -129,7 +129,6 @@ console.log(
 */
 export {
   compose,
-  compose0,
   compose1,
   compose2,
   compose3,
