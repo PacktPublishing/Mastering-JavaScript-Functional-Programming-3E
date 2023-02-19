@@ -1,14 +1,3 @@
-// https://en.wikipedia.org/wiki/Lambda_calculus#Logic_and_predicates
-
-// Church encoding
-// http://www.usrsb.in/blog/blog/2012/04/01/building-data-structures-from-functions/
-
-// http://www.cs.cornell.edu/courses/cs3110/2008fa/recitations/rec26.html
-
-// https://mitpress.mit.edu/sicp/full-text/book/book.html
-// https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-14.html#%_sec_2.1.3
-// https://web.mit.edu/alexmv/6.037/sicp.pdf
-
 /*
 In the end, this might strike you as nothing more than a useless programming trick.
 In a sense that’s right. I’d never use this in my own code. What makes this technique

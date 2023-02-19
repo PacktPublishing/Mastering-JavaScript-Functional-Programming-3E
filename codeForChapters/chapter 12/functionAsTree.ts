@@ -8,17 +8,17 @@ type TREE<A> = (
     _left: TREE<A>,
     _right: TREE<A>
   ) => any,
-  _emptyTree: TREE<A>
+  _emptyTree: () => any
 ) => any;
 
 const NewTree =
   <A>(value: A, left: TREE<A>, right: TREE<A>): TREE<A> =>
-  (destructure: FN, __: FN) =>
+  (destructure, _) =>
     destructure(value, left, right);
 
 const EmptyTree =
   <A>(): TREE<A> =>
-  (__: FN, destructure: FN) =>
+  (_, destructure) =>
     destructure();
 
 const myTree: TREE<number> = NewTree(
@@ -65,8 +65,8 @@ const treeIsEmpty = <A>(tree: TREE<A>): boolean =>
   );
 console.log("EMPTY?", treeIsEmpty(myTree));
 
-const treeCount = <A>(aTree: TREE<A>): number =>
-  aTree(
+const treeCount = <A>(tree: TREE<A>): number =>
+  tree(
     (_value, left, right) =>
       1 + treeCount(left) + treeCount(right),
     () => 0

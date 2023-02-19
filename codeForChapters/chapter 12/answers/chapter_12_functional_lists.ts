@@ -1,13 +1,3 @@
-/*
-    h: stands for the head of a list
-    t: stands for the tail of a list
-
-    v: stands for a value
-    p: stands for a position -- the head of the list is at position 0
-
-    f: a destructuring function: f(h,t)
-    g: a destructuring null function: g()
-*/
 import type { FN } from "../../common";
 
 type LIST<A> = (

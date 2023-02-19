@@ -68,4 +68,5 @@ const treeRemove = <A>(
     },
     () => tree
   );
+
 export {};
