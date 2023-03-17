@@ -1,5 +1,5 @@
 import { fakeFilter } from "../async";
-import { someAsync } from "./question_5.missing equivalents";
+import { someAsync } from "./question_5.missing_equivalents";
 
 describe("someAsync", () => {
   it("succeeds if sometimes OK", async () => {

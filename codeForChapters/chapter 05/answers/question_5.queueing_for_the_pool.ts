@@ -11,11 +11,11 @@ const pool: PoolEntry[] = [];
 
 const notInUse = (p: PoolEntry): boolean => !p.inUse;
 
-const queue: ((v?: any) => void)[] = [];
+const queue: ((_v?: any) => void)[] = [];
 let running = 0;
 const MAX_TO_USE = 5;
 
-const enqueue = (resolve2: (v?: any) => void) => {
+const enqueue = (resolve2: (_v?: any) => void) => {
   if (running < MAX_TO_USE) {
     running++;
     resolve2();
@@ -33,7 +33,7 @@ export const workerCall = (
   filename: string,
   value: any
 ): Promise<any> => {
-  return new Promise(async (resolve) => {
+  return new Promise((resolve) => {
     new Promise((resolve2) => enqueue(resolve2)).then(
       () => {
         let available = pool

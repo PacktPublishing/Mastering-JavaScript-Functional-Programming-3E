@@ -1,4 +1,4 @@
-import { range4 } from "./question_5.range generator";
+import { range4 } from "./question_5.range_generator";
 
 describe("range4", () => {
   it("generates 2..5", () => {

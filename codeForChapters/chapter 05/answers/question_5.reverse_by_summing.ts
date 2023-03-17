@@ -1,7 +1,7 @@
 // no overloading for arrow functions!
 
-function sum(x: number, y: number): number;
-function sum(x: string, y: string): string;
+function sum(_x: number, _y: number): number;
+function sum(_x: string, _y: string): string;
 function sum(x: any, y: any): string | number {
   return x + y;
 }

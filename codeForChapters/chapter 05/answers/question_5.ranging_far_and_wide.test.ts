@@ -1,4 +1,4 @@
-import { range2 } from "./question_5.ranging far and wide";
+import { range2 } from "./question_5.ranging_far_and_wide";
 
 describe("range2()", () => {
   it("works from 1 to 10", () =>

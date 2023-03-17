@@ -1,8 +1,3 @@
-import {
-  range2,
-  range2b,
-} from "./question_5.ranging far and wide";
-
 function* range4(
   from: number,
   to: number,
