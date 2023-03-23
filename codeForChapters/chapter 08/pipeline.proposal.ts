@@ -10,6 +10,12 @@ function stringify(z: number) {
   return `${z}${z}${z}`;
 }
 
+/*
+  Do not try to run this code!
+  It isn't accepted yet, so it will
+  just produce syntax errors
+*/
+
 console.log(4 |> double |> add1 |> stringify)
 
 export {};
