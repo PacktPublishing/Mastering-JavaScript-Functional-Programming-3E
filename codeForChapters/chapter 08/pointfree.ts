@@ -15,6 +15,12 @@ const countOdtFiles4b = pipeTwo(
   pipeTwo(filterOdt, count)
 );
 
+/*
+  Note: the following code will fail if you
+  don't have a /home/fkereki/Documents directory.
+  Substitute another directory from your own machine.
+*/
+
 console.log(
   countOdtFiles3b("/home/fkereki/Documents"),
   countOdtFiles4b("/home/fkereki/Documents")

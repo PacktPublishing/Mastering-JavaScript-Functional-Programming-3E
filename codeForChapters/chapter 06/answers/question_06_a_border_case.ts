@@ -1,5 +1,3 @@
-// continued...
-
 const getField =
   <D>(f: keyof D) =>
   (obj: D) =>

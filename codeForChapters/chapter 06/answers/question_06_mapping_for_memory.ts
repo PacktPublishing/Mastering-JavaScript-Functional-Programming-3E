@@ -1,6 +1,6 @@
-const memoize4 = <T extends (...x: any[]) => any>(
+const memoize4 = <T extends (..._x: any[]) => any>(
   fn: T
-): ((...x: Parameters<T>) => ReturnType<T>) => {
+): ((..._x: Parameters<T>) => ReturnType<T>) => {
   const cache = new Map() as Map<string, ReturnType<T>>;
   return (...args) => {
     const strX = JSON.stringify(args);
@@ -22,7 +22,7 @@ function fib(n: number): number {
 }
 
 // @ts-expect-error We want to reassign the function
-fib = memoize5(fib);
+fib = memoize4(fib);
 
 console.log(new Date().getTime());
 console.log(new Date().getTime(), fib(50));

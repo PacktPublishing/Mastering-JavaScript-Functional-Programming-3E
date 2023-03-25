@@ -59,6 +59,11 @@ console.log("------------------------");
 console.log(getDir.name, filterOdt.name, count.name);
 console.log("------------------------");
 
+/*
+  Note: the following code will fail if you
+  don't have a /home/fkereki/Documents directory.
+  Substitute another directory from your own machine.
+*/
 pipeline(
   addLogging(getDir),
   addLogging(filterOdt),

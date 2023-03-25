@@ -28,6 +28,12 @@ const countOdtFiles = (path: string): number => {
   return countOfFiles;
 };
 
+/*
+  Note: the following code will fail if you
+  don't have a /home/fkereki/Documents directory.
+  Substitute another directory from your own machine.
+*/
+
 const c = countOdtFiles("/home/fkereki/Documents");
 // 4, as with the command line solution
 // console.log(c);
