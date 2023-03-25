@@ -3,9 +3,9 @@ import { range } from "../../chapter 05/range";
 import type { Curry } from "../curry";
 
 function curryByEval<A extends any[], R>(
-  fn: (...args: A) => R
+  _fn: (..._args: A) => R
 ): Curry<A, R>;
-function curryByEval(fn: (...args: any) => any) {
+function curryByEval(fn: (..._args: any) => any) {
   return eval(`${range(0, fn.length)
     .map((i) => `x${i}`)
     .join("=>")} =>
@@ -15,9 +15,9 @@ function curryByEval(fn: (...args: any) => any) {
 }
 
 function curryByEval2<A extends any[], R>(
-  fn: (...args: A) => R
+  _fn: (..._args: A) => R
 ): Curry<A, R>;
-function curryByEval2(fn: (...args: any) => any) {
+function curryByEval2(fn: (..._args: any) => any) {
   return eval(`${range(0, fn.length)
     .map((i) => `x${i}`)
     .join("=>")} =>
