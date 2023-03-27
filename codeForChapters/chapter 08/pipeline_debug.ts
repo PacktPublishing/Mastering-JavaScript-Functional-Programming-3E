@@ -65,6 +65,7 @@ console.log("------------------------");
   Substitute another directory from your own machine.
 */
 
+// @ts-expect-error TypeScript doesn't like addLogging as generic
 pipeline(
   addLogging(getDir),
   addLogging(filterOdt),
