@@ -1,4 +1,4 @@
-import type { FN } from "../common";
+import type { FN } from "../../common";
 
 const trampoline = (fn: FN): any => {
   while (typeof fn === "function") {

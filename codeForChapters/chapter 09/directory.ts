@@ -20,6 +20,11 @@ const recursiveDir = (path: string) => {
   });
 };
 
+/*
+  If you don't have a /boot directory,
+  the following will fail; substitute
+  another directory instead.
+*/
 recursiveDir("/boot");
 
 export {};
