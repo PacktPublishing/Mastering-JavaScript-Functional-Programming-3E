@@ -1,7 +1,7 @@
 import { compose } from "./compose";
 
 import type { FN } from "../common";
-/*
+
 const testOdd = (x: number): boolean => x % 2 === 1;
 const testUnderFifty = (x: number): boolean => x < 50;
 const duplicate = (x: number): number => x + x;
@@ -16,7 +16,7 @@ const a0 = myArray
   .map(addThree);
 console.log(a0);
 // [ 21, 25 ]
-*/
+
 const mapTR =
   <V, W>(fn: (x: V) => W) =>
   <A>(reducer: (am: A, wm: W) => A) =>
@@ -29,17 +29,16 @@ const filterTR =
   (accum: A, value: V): A =>
     fn(value) ? reducer(accum, value) : accum;
 
-/*
 const testOddR = filterTR(testOdd);
 const duplicateR = mapTR(duplicate);
 const testUnderFiftyR = filterTR(testUnderFifty);
 const addThreeR = mapTR(addThree);
-*/
+
 const addToArray = (a: any[], v: any): any[] => {
   a.push(v);
   return a;
 };
-/*
+
 console.log(
   myArray.reduce(
     testOddR(
@@ -49,10 +48,10 @@ console.log(
   )
 );
 // [ 21, 25 ]
-*/
+
 const transduce = <A>(arr: A[], fns: FN[]) =>
   arr.reduce(compose(...fns)(addToArray), []);
-/*
+
 console.log(
   transduce(myArray, [
     testOddR,
@@ -62,14 +61,14 @@ console.log(
   ])
 );
 // [ 21, 25 ]
-*/
+
 const transduce2 = <A>(
   arr: A[],
   fns: FN[],
   reducer: FN = addToArray,
   initial: any = []
 ) => arr.reduce(compose(...fns)(reducer), initial);
-/*
+
 console.log(
   transduce2(myArray, [
     testOddR,
@@ -89,5 +88,5 @@ console.log(
   )
 );
 // 46
-*/
+
 export { transduce, transduce2, filterTR, mapTR };

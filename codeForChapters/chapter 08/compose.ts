@@ -1,6 +1,5 @@
 import { pipeline, pipeTwo, FN } from "./pipeline";
 
-/*
 const demethodize =
   <T extends (arg0: any, ...args: any[]) => any>(fn: T) =>
   (arg0: any, ...args: Parameters<T>): ReturnType<T> =>
@@ -29,7 +28,6 @@ to the proposition that all men are created equal.
 Now we are engaged in a great civil war, testing
 whether that nation, or any nation so conceived
 and so dedicated, can long endure.`;
-*/
 
 type FnsMatchComp<FNS extends FN[]> =
   1 extends FNS["length"]
@@ -116,9 +114,8 @@ function flip2<A, B, R>(fn: (a: A, b: B) => R) {
 
 const composeTwoByFlipping = flip2(pipeTwo);
 
-/*
 console.log(
-  compose2(
+  compose3(
     setToList,
     arrayToSet,
     splitInWords,
@@ -126,7 +123,7 @@ console.log(
     removeNonAlpha
   )(GETTYSBURG_1_2)
 );
-*/
+
 export {
   compose,
   compose1,

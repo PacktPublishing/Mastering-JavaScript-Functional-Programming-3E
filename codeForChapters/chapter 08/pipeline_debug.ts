@@ -21,7 +21,7 @@ function curry(fn: (..._args: any) => any) {
     : (x: any) => curry(fn.bind(null, x));
 }
 
-const tee = <A>(arg: A) => {
+const tee = <A>(arg: A): A => {
   console.log(arg);
   return arg;
 };
@@ -33,12 +33,12 @@ const tee = <A>(arg: A) => (console.log(arg), arg);
 console.log("------------------------");
 
 console.log(
-  pipeline3(
+  pipeline(
     getDir,
-    tee,
+    <typeof tee<string[]>>tee,
     filterOdt,
-    tee,
-    count
+    <typeof tee<string[]>>tee,
+    <typeof count<string>>count
   )("/home/fkereki/Documents")
 );
 
@@ -64,6 +64,7 @@ console.log("------------------------");
   don't have a /home/fkereki/Documents directory.
   Substitute another directory from your own machine.
 */
+
 pipeline(
   addLogging(getDir),
   addLogging(filterOdt),

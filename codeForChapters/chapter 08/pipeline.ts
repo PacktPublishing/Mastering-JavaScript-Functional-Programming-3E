@@ -2,7 +2,7 @@ import { curry } from "../chapter 07/curry.fn";
 import fs from "fs";
 import type { FN } from "../common";
 
-function getDir(path: string) {
+function getDir(path: string): string[] {
   const files = fs.readdirSync(path);
   return files;
 }
