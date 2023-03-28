@@ -186,3 +186,4 @@ const nullTree = EmptyTree();
 console.log(treeToObject(nullTree));
 
 export type { TREE };
+export { NewTree, EmptyTree, treeIsEmpty };

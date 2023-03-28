@@ -5,6 +5,10 @@ type LIST<A> = (
   _emptyList: LIST<A>
 ) => any;
 
+const throwEmptyListError = () => {
+  throw new Error("Empty List");
+};
+
 const NewList =
   <A>(head: A, tail: LIST<A>): LIST<A> =>
   (f: FN, _g: FN) =>
@@ -115,7 +119,10 @@ const listSize2 = <A>(list: LIST<A>): number => {
   return accumSize(0, list);
 };
 
-const listConcat = <A>(list1: LIST<A>, list2: LIST<A>) =>
+const listConcat = <A>(
+  list1: LIST<A>,
+  list2: LIST<A>
+): LIST<A> =>
   list1(
     (head, tail) => NewList(head, listConcat(tail, list2)),
     () => list2

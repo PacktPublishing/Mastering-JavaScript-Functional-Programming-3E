@@ -1,4 +1,9 @@
 import type { TREE } from "../functionAsTree";
+import {
+  NewTree,
+  EmptyTree,
+  treeIsEmpty,
+} from "../functionAsTree";
 
 const treeHeight = <A>(tree: TREE<A>): number =>
   tree(
@@ -36,7 +41,7 @@ const treeRemove = <A>(
               const result = findMinimumAndRemove(left);
               return {
                 min: result.min,
-                tree: Tree(value, result.tree, right),
+                tree: NewTree(value, result.tree, right),
               };
             }
           },
@@ -45,9 +50,17 @@ const treeRemove = <A>(
           }
         );
       if (toRemove < val) {
-        return Tree(val, treeRemove(toRemove, left), right);
+        return NewTree(
+          val,
+          treeRemove(toRemove, left),
+          right
+        );
       } else if (toRemove > val) {
-        return Tree(val, left, treeRemove(toRemove, right));
+        return NewTree(
+          val,
+          left,
+          treeRemove(toRemove, right)
+        );
       } else if (treeIsEmpty(left) && treeIsEmpty(right)) {
         return EmptyTree();
       } else if (treeIsEmpty(left) !== treeIsEmpty(right)) {
@@ -63,7 +76,7 @@ const treeRemove = <A>(
         );
       } else {
         const result = findMinimumAndRemove(right);
-        return Tree(result.min, left, result.tree);
+        return NewTree(result.min, left, result.tree);
       }
     },
     () => tree
