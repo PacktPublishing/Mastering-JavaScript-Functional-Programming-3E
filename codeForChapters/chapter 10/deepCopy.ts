@@ -29,10 +29,10 @@ const newObject2 = Object.assign({}, oldObject);
 newObject2.d = 8888;
 newObject2.o.f.a = 9999;
 
-console.log(newObject2);
+// console.log(newObject2);
 // {d:8888, m:9, o: {c:"MVD", i:"UY", f: {a:9999}}} -- ok
 
-console.log(oldObject);
+// console.log(oldObject);
 // {d:22, m:9, o: {c:"MVD", i:"UY", f: {a:9999}}} -- oops!!
 
 const jsonCopy = <O extends OBJ>(obj: O): O =>
@@ -40,7 +40,7 @@ const jsonCopy = <O extends OBJ>(obj: O): O =>
 
 const myDate = new Date();
 const newDate = jsonCopy(myDate);
-console.log(typeof myDate, typeof newDate); // object string
+// console.log(typeof myDate, typeof newDate); // object string
 
 const deepCopy = <O extends OBJ>(obj: O): O => {
   let aux: O = obj;

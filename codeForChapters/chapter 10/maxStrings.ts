@@ -1,13 +1,15 @@
-const maxStrings = (a: string[]): string => a.sort().pop();
+const maxStrings = (a: string[]): string | undefined =>
+  a.sort().pop();
 
-let countries = [
+const countries = [
   "Argentina",
   "Uruguay",
   "Brasil",
   "Paraguay",
 ];
 
-console.log(maxStrings(countries)); // "Uruguay" console.log(countries); // ["Argentina", "Brasil", "Paraguay"]
+console.log(maxStrings(countries)); // "Uruguay"
+console.log(countries); // ["Argentina", "Brasil", "Paraguay"]
 
 const maxStrings2 = (a: string[]): string =>
   [...a].sort().pop() as string;

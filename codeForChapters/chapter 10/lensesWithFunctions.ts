@@ -123,4 +123,4 @@ console.log(444, lastName);
         Kereki
         */
 
-export {};
+export { lens };

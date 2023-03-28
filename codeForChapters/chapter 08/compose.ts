@@ -114,6 +114,7 @@ function flip2<A, B, R>(fn: (a: A, b: B) => R) {
 
 const composeTwoByFlipping = flip2(pipeTwo);
 
+/*
 console.log(
   compose3(
     setToList,
@@ -123,7 +124,7 @@ console.log(
     removeNonAlpha
   )(GETTYSBURG_1_2)
 );
-
+*/
 export {
   compose,
   compose1,

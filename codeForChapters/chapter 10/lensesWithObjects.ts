@@ -49,9 +49,9 @@ const view =
 const lens1 = lens(getField("user"), setField("user"));
 const lens1b = lensProp("user");
 
+/*
 console.log(view(lens1)(author));
 console.log(view(lens1b)(author));
-
 console.log(
   view(lensProp("last"))(view(lensProp("name"))(author))
 );
@@ -62,15 +62,15 @@ console.log(
     view(lensBooks)(author).length +
     " book(s)"
 );
-
+*/
 const set =
   <O extends OBJ>(someLens: LENS<O>) =>
   (newVal: any) =>
   (someObj: O) =>
     someLens.setter(newVal)(someObj);
-
+/*
 console.log("333", set(lens1)("FEFK")(author));
-
+*/
 const over =
   <O extends OBJ>(someLens: LENS<O>) =>
   (mapFn: (arg: any) => any) =>
@@ -81,8 +81,9 @@ const over =
 
 const triple = (x: string): string => x + x + x;
 const newAuthor = over(lens1)(triple)(author);
+/*
 console.log(newAuthor);
-
+*/
 const composeTwoLenses = <O extends OBJ>(
   lens1: LENS<O>,
   lens2: LENS<O>
@@ -129,7 +130,9 @@ const setTo60 = set(lCEGJK1)(60)(deepObject);
 console.log("SET", JSON.stringify(setTo60));
 
 const setToDouble = over(lCEGJK2)((x) => x * 2)(deepObject);
+/*
 console.log("OVER", JSON.stringify(setToDouble));
+*/
 
 /* Answer to question:
 

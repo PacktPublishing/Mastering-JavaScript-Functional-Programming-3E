@@ -1,3 +1,5 @@
+import { lens } from "../lensesWithObjects";
+
 const getMap =
   <K, V>(key: K) =>
   (map: Map<K, V>) =>
