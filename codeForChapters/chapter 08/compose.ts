@@ -10,7 +10,7 @@ const removeNonAlpha = (str: string): string =>
 
 const toUpperCase = demethodize(
   String.prototype.toUpperCase
-) as (x: string) => string;
+) as (_x: string) => string;
 
 const splitInWords = (str: string): string[] =>
   str.trim().split(/\s+/);
@@ -125,6 +125,7 @@ console.log(
   )(GETTYSBURG_1_2)
 );
 */
+
 export {
   compose,
   compose1,

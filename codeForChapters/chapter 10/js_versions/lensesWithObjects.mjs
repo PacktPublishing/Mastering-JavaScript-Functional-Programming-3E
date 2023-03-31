@@ -163,3 +163,5 @@ const composeManyLenses = (...lenses) =>
 console.log(
   view(composeManyLenses(lC, lE, lG, lJ, lK), deepObject)
 );
+
+export default lens;

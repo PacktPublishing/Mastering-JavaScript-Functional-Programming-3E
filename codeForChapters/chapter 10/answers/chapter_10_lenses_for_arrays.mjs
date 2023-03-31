@@ -1,5 +1,5 @@
-import { curry } from "../../chapter 07/js_versions/curry";
-import { lens } from "../js_versions/lensesWithObjects.mjs";
+import curry from "../../chapter 07/js_versions/curry.js";
+import lens from "../js_versions/lensesWithObjects.mjs";
 
 const getArray = curry((ind, arr) => arr[ind]);
 

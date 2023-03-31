@@ -50,3 +50,5 @@ sum2(1, 5, 3, 7, 4); // 20
 
 const curriedSum5 = curry2(sum2, 5); // curriedSum5 will expect 5 parameters
 // console.log(curriedSum5(1)(5)(3)(7)(4)); // 20
+
+module.exports = curry;

@@ -1,5 +1,4 @@
 import { pipeline } from "../pipeline";
-// import { getField } from "../../chapter 06/getField";
 
 const allTasks = {
   date: "2017-09-22",
@@ -32,17 +31,17 @@ const getField =
     obj[f]; // from Chapter 6
 
 const filter =
-  <A>(fn: (x: A) => boolean) =>
+  <A>(fn: (_x: A) => boolean) =>
   (arr: A[]) =>
     arr.filter(fn);
 
 const map =
-  <B, C>(fn: (x: B) => C) =>
+  <B, C>(fn: (_x: B) => C) =>
   (arr: B[]) =>
     arr.map(fn);
 
 const reduce =
-  <V, A>(fn: (acc: A, val: V) => A, init: A) =>
+  <V, A>(fn: (_acc: A, _val: V) => A, init: A) =>
   (arr: V[]) =>
     arr.reduce(fn, init);
 
@@ -50,15 +49,20 @@ const pending = (
   listOfTasks: typeof allTasks,
   name: string
 ) =>
-  // @ts-expect-error Ignore all!
+  // @ts-expect-error pipeline (TS!) gets confused
   pipeline(
-    // @ts-expect-error Ignore all!
-    filter((t) => t.responsible === name),
-    // @ts-expect-error Ignore all!
-    map((t) => t.tasks),
+    (x: typeof allTasks) => x.byPerson,
+    filter(
+      (t: (typeof allTasks.byPerson)[0]) =>
+        t.responsible === name
+    ),
+    map((t: (typeof allTasks.byPerson)[0]) => t.tasks),
+    // @ts-expect-error This is OK.
     reduce((y, x) => x, []),
-    // @ts-expect-error Ignore all!
-    filter((t) => t && !t.done),
+    filter(
+      (t: { id: number; desc: string; done: boolean }) =>
+        t && !t.done
+    ),
     map(getField("id"))
   )(allTasks || { byPerson: [] }); //
 
