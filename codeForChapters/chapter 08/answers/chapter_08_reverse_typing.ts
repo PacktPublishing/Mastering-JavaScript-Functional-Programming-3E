@@ -1,4 +1,5 @@
-import { FN, Pipeline } from "../pipeline.fn";
+import { FN, pipeline } from "../pipeline";
+import type { Pipeline } from "../pipeline";
 
 type Reverse<FNS extends FN[]> = 1 extends FNS["length"]
   ? [FNS[0]]
@@ -23,5 +24,6 @@ const ts = (y: number): string => `${y}`;
 const ds = (z: string): boolean => z > "5";
 
 const fff = compose1(ds, ts, x2, tn);
+console.log(fff);
 
 export {};
