@@ -43,3 +43,5 @@ console.log(strings);
 // ["2,209.6", "124.56", "1,048,576"]
 const strings2 = map(numbers, toLocaleString);
 console.log(strings2);
+
+export { demethodize1, demethodize2, demethodize3 };

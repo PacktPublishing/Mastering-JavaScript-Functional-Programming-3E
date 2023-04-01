@@ -1,5 +1,4 @@
 import { Either } from "./either";
-import type { OBJ } from "../common";
 
 class Try<A> extends Either<A, string> {
   // @ts-expect-error Call to super() not needed
@@ -15,10 +14,4 @@ class Try<A> extends Either<A, string> {
   }
 }
 
-const getField2 = (attr: string) => (obj: OBJ | null) =>
-  new Try(() => obj![attr], "NULL OBJECT");
-
-const x = getField2("somefield")(null);
-
-console.log(x.isLeft()); // true
-console.log(x.toString()); // Left(NULL OBJECT)
+export { Try };

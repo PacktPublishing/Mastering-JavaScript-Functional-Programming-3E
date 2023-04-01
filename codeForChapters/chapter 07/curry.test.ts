@@ -1,4 +1,4 @@
-import { curry, make3 } from "./curry";
+import { curry, make3 } from "./curry.examples";
 
 describe("with curry", function () {
   it("you fix arguments one by one", () => {

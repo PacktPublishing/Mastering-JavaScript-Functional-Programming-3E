@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
 
-import { curry } from "../chapter 07/curry";
+import { curry } from "../chapter 07/curry.examples";
 import type { FN } from "../common";
 
 // firstToUpper :: String → String

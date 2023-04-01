@@ -72,4 +72,4 @@ export { myNormalLog, myWarningLog, myErrorLog };
 export { myNormalLog2, myWarningLog2, myErrorLog2 };
 */
 
-export { make3, make3curried, make3curried2, myLog };
+export {};

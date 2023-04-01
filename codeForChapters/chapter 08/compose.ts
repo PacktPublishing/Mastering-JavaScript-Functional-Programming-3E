@@ -1,34 +1,5 @@
 import { pipeline, pipeTwo, FN } from "./pipeline";
 
-const demethodize =
-  <T extends (arg0: any, ...args: any[]) => any>(fn: T) =>
-  (arg0: any, ...args: Parameters<T>): ReturnType<T> =>
-    fn.bind(arg0, ...args)();
-
-const removeNonAlpha = (str: string): string =>
-  str.replace(/[^a-z]/gi, " ");
-
-const toUpperCase = demethodize(
-  String.prototype.toUpperCase
-) as (_x: string) => string;
-
-const splitInWords = (str: string): string[] =>
-  str.trim().split(/\s+/);
-
-const arrayToSet = (arr: string[]): Set<string> =>
-  new Set(arr);
-
-const setToList = (set: Set<string>): string[] =>
-  Array.from(set).sort();
-
-const GETTYSBURG_1_2 = `Four score and seven years
-ago our fathers brought forth, on this continent,
-a new nation, conceived in liberty, and dedicated
-to the proposition that all men are created equal.
-Now we are engaged in a great civil war, testing
-whether that nation, or any nation so conceived
-and so dedicated, can long endure.`;
-
 type FnsMatchComp<FNS extends FN[]> =
   1 extends FNS["length"]
     ? boolean
@@ -113,18 +84,6 @@ function flip2<A, B, R>(fn: (a: A, b: B) => R) {
 }
 
 const composeTwoByFlipping = flip2(pipeTwo);
-
-/*
-console.log(
-  compose3(
-    setToList,
-    arrayToSet,
-    splitInWords,
-    toUpperCase,
-    removeNonAlpha
-  )(GETTYSBURG_1_2)
-);
-*/
 
 export {
   compose,

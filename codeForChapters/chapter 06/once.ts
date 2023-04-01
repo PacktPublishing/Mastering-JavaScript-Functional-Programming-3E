@@ -1,5 +1,4 @@
 /*
-
 const onceAndAfter = (f, g) => {
   let done = false;
   return (...args) => {
@@ -11,7 +10,6 @@ const onceAndAfter = (f, g) => {
     }
   };
 };
-
 */
 
 function once<T extends (...args: any[]) => void>(
@@ -70,26 +68,5 @@ function onceAndAfter2<T extends (...args: any[]) => any>(
     return result;
   }) as T;
 }
-
-const squeak = (x: string) => console.log(x, "squeak!!");
-const creak = (x: string) => console.log(x, "creak!!");
-const makeSound = onceAndAfter2(squeak, creak);
-makeSound("door"); // "door squeak!!"
-makeSound("door"); // "door creak!!"
-makeSound("door"); // "door creak!!"
-makeSound("door"); // "door creak!!"
-
-/*
-
-
-  const squeak = (x) => console.log(x, "squeak!!");
-  const creak = (x) => console.log(x, "creak!!");
-  const makeSound = onceAndAfter2(squeak, creak);
-  makeSound("door"); // "door squeak!!"
-  makeSound("door"); // "door creak!!"
-  makeSound("door"); // "door creak!!"
-  makeSound("door"); // "door creak!!"
-
-  */
 
 export { once, once2, onceAndAfter, onceAndAfter2 };

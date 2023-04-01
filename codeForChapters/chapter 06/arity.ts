@@ -9,19 +9,8 @@ const unary =
   (x) =>
     fn(x);
 
-console.log(["123.45", "-67.8", "90"].map(unary(parseInt)));
-// [123, -67, 90]
-
-console.log(
-  ["123.45", "-67.8", "90"].map((x) =>
-    parseInt(x, undefined)
-  )
-);
-
 /*
-
 const arity = (n, fn) => ()...a) => fn(...a.slice(0, n));
-
 */
 
 function arity<T extends (...args: any[]) => any>(
@@ -32,9 +21,4 @@ function arity<T extends (...args: any[]) => any>(
     fn(...x.map((v, i) => (i < n ? v : undefined)));
 }
 
-const pp = arity(1, parseInt);
-
-console.log(["123.45", "-67.8", "90"].map(pp));
-// [123, -67, 90]
-
-export { unary, binary, ternary, arity };
+export { unary, arity };

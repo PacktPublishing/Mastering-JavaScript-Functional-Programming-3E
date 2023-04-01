@@ -2,20 +2,6 @@ import { compose } from "../chapter 08/compose";
 
 import type { FN, OBJ } from "../common";
 
-const author = {
-  user: "fkereki",
-  name: {
-    first: "Federico",
-    middle: "",
-    last: "Kereki",
-  },
-  books: [
-    { name: "Google Web Toolkit", year: 2010 },
-    { name: "Functional Programming", year: 2017 },
-    { name: "Javascript Cookbook", year: 2018 },
-  ],
-};
-
 const getField =
   <O extends OBJ>(attr: keyof O) =>
   (obj: O) =>
@@ -59,12 +45,6 @@ const view =
   (obj: O) =>
     someLens((x: V) => new Constant(x))(obj).value;
 
-const user = view(lensProp("user"))(author);
-console.log(111, user);
-/*
-  fkereki
-*/
-
 class Variable<V> {
   private value: V;
   map: FN;
@@ -81,46 +61,11 @@ const set =
   (obj: O) =>
     someLens(() => new Variable(newVal))(obj).value;
 
-const changedUser = set(lensProp("user"))("FEFK")(author);
-console.log(222, changedUser);
-/*
-    {
-    user: "FEFK",
-    name: {first: "Federico", middle: "", last: "Kereki"},
-    books: [
-    {name: "GWT", year: 2010},
-    {name: "FP", year: 2017},
-    {name: "CB", year: 2018},
-],
-};
-*/
-
 const over =
   <O extends OBJ, V>(someLens: LENS<O>) =>
   (mapfn: FN) =>
   (obj: O) =>
     someLens((x: V) => new Variable(mapfn(x)))(obj).value;
 
-const triple = (x: string): string => x + x + x;
-const newAuthor = over(lensProp("user"))(triple)(author);
-console.log(333, newAuthor);
-/*
-    user: "fkerekifkerekifkereki",
-    name: {first: "Federico", middle: "", last: "Kereki"},
-    books: [
-    {name: "GWT", year: 2010},
-    {name: "FP", year: 2017},
-    {name: "CB", year: 2018},
-    ],
-    }
-    */
-
-const lastName = view(
-  compose(lensProp("name"), lensProp("last"))
-)(author);
-console.log(444, lastName);
-/*
-        Kereki
-        */
-
-export { lens };
+export { lens, lensProp, view, set, over };
+export type { LENS };

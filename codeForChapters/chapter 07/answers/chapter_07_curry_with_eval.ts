@@ -1,6 +1,6 @@
 import { range } from "../../chapter 05/range";
 
-import type { Curry } from "../curry";
+import type { Curry } from "../curry.examples";
 
 function curryByEval<A extends any[], R>(
   _fn: (..._args: A) => R

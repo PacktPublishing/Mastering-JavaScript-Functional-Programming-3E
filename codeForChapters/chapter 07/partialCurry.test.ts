@@ -1,7 +1,7 @@
 import {
   partialCurryByBind,
   partialCurryByClosure,
-} from "./partialCurry";
+} from "./partialCurry.examples";
 
 const make3 = (a: string, b: number, c: string): string =>
   `${a}:${b}:${c}`;
