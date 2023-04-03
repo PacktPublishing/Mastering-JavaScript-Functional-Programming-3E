@@ -1,9 +1,9 @@
+import { pipeTwo } from "./pipeline";
 import {
   getDir,
   filterOdt,
-  pipeTwo,
   count,
-} from "./pipeline";
+} from "./pipeline.examples";
 
 const countOdtFiles3b = pipeTwo(
   pipeTwo(getDir, filterOdt),

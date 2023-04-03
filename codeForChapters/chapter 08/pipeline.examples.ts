@@ -77,3 +77,5 @@ const countOdtFiles7 = (path: string): number =>
   pipeline3(getDir, pipeTwo(filterOdt, count))(path);
 const c7 = countOdtFiles7("/home/fkereki/Documents");
 console.log(c7);
+
+export { getDir, count, filterOdt };

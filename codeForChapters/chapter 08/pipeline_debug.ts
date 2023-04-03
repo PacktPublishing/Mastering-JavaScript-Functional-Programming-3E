@@ -1,6 +1,10 @@
 import { addLogging } from "../chapter 06/logging";
 import { pipeline, pipeline3 } from "./pipeline";
-import { getDir, filterOdt, count } from "./pipeline";
+import {
+  getDir,
+  filterOdt,
+  count,
+} from "./pipeline.examples";
 
 import type { FN } from "../common";
 
