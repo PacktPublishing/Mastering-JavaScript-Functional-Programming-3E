@@ -2,7 +2,7 @@
 
 <a href="https://www.packtpub.com/product/mastering-javascript-functional-programming-third-edition/9781804610138"><img src="https://content.packt.com/B19301/cover_image_small.jpg" alt="Mastering JavaScript Functional Programming - Third Edition" height="256px" align="right"></a>
 
-This is the code repository for [Mastering JavaScript Functional Programming](https://www.packtpub.com/product/mastering-javascript-functional-programming-third-edition/9781804610138), published by Packt.
+This is the code repository for [Mastering JavaScript Functional Programming - Third Edition](https://www.packtpub.com/product/mastering-javascript-functional-programming-third-edition/9781804610138), published by Packt.
 
 **Write clean, robust, and maintainable web and server code using functional JavaScript and TypeScript**
 
