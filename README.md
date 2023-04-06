@@ -1,4 +1,4 @@
-# Mastering JavaScript Functional Programming
+# Mastering JavaScript Functional Programming - Third Edition
 
 <a href="https://www.packtpub.com/product/mastering-javascript-functional-programming-third-edition/9781804610138"><img src="https://content.packt.com/B19301/cover_image_small.jpg" alt="Mastering JavaScript Functional Programming - Third Edition" height="256px" align="right"></a>
 
