@@ -68,3 +68,8 @@ is a Uruguayan Systems Engineer, with a Master's degree in Education, and over 3
 * [Mastering JavaScript Functional Programming](https://www.packtpub.com/product/mastering-javascript-functional-programming/9781787287440)
 * [Mastering JavaScript Functional Programming - Second Edition](https://www.packtpub.com/product/mastering-javascript-functional-programming-second-edition/9781839213069)
 * [Modern JavaScript Web Development Cookbook](https://www.packtpub.com/product/modern-javascript-web-development-cookbook/9781788992749)
+
+### Download a free PDF
+
+ <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
+<p align="center"> <a href="https://packt.link/free-ebook/9781804610138">https://packt.link/free-ebook/9781804610138 </a> </p>
