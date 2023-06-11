@@ -8,3 +8,5 @@ const f1 = f0(undefined, 2);
 const f2 = f1("A");
 const f3 = f2("Z");
 console.log(f3);
+
+export {};

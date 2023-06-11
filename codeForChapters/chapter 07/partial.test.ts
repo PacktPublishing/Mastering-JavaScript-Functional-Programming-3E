@@ -1,6 +1,6 @@
 // ESTOS TESTS FUNCIONAN PERFECTO PARA partial()
 
-import { partial } from "./partial.examples";
+import { partial } from "./partial";
 
 function nonsense(
   a: number,
