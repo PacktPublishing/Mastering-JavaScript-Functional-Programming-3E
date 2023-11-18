@@ -18,6 +18,7 @@ type QRY<P extends any[], R> = 0 extends P["length"]
   ? (a: P[0]) => QRY<[P[1], P[2], P[3]], R>
   : never;
 
+/* ORIGINAL
 function curry<A extends any[], R>(
   fn: (...args: A) => R
 ): QRY<A, R>;
@@ -27,6 +28,18 @@ function curry(
   if (fn.length === 0) return fn();
 
   return (x: any) => curry(fn.bind(null, x));
+}
+*/
+
+function curry<A extends any[], R>(
+  fn: (...args: A) => R
+): QRY<A, R>;
+function curry(
+  fn: (...args: any[]) => any
+): QRY<Parameters<typeof fn>, ReturnType<typeof fn>> {
+  return fn.length === 0
+    ? fn()
+    : (x: any) => curry(fn.bind(null, x));
 }
 
 const make3 = (a: string, b: number, c: string): string =>
