@@ -38,7 +38,7 @@ console.log(reverseString("MONTEVIDEO")); // OEDIVETNOM
 ```
 
 **Following is what you need for this book:**
-This book is for aspiring SwiftUI developers who have a basic understanding of Swift. It can also be used by SwiftUI developers, UIKit developers, and iOS developers that are new to SwiftUI and want to improve their animation proficiency.
+If you are a JavaScript or TypeScript developer looking to enhance your programming skills, then this book is for you. The book applies to both frontend developers working with frameworks such as React, Vue, or Angular as well as backend developers using Node.js or Deno.
 
 With the following software and hardware list you can run all code files present in the book (Chapter 1-12).
 
