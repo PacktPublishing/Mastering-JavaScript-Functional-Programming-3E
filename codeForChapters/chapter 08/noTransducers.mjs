@@ -132,4 +132,4 @@ const newValue = singlePassMoreGeneral(
 );
 console.log(newValue);
 
-export {};
+export { applyMap, applyFilter, singlePassMoreGeneral };
