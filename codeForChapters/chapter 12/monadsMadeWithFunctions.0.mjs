@@ -7,14 +7,10 @@ function Container(x) {
   this.map = (fn) => fn(x);
 }
 
-Container.of = (x) => new Container(x);
-
 function Functor(x) {
   Container.call(this, x);
   this.map = (fn) => new this.constructor(fn(x));
 }
-
-Functor.of = (x) => new Functor(x);
 
 const unwrap = (z) => (z.chain ? unwrap(z.valueOf()) : z);
 // PROBABLEMENTE NO PRECISE RECURSIVIDAD -
@@ -25,8 +21,6 @@ function Monad(x) {
   this.chain = (fn) => new this.constructor(unwrap(fn(x)));
   this.ap = (mon) => mon.map(x);
 }
-
-Monad.of = (x) => new Monad(x);
 
 function Nothing() {
   Monad.call(this);
@@ -44,8 +38,10 @@ function Just(x) {
   this.orElse = () => this;
 }
 
+const isEmpty(null) = x === null || x === undefined;
+
 function Maybe(x) {
-  x === null ? Nothing.call(this) : Just.call(this, x);
+  isEmpty(x) ? Nothing.call(this) : Just.call(this, x);
 }
 
 function Left(x) {
@@ -64,7 +60,8 @@ function Right(x) {
 }
 
 function Either(l, r) {
-  r === null ? Left.call(this, l) : Right.call(this, r);
+  isEmpty(r) ? Left.call(this, l) : Right.call(this, r);
+  this.toString = () => `Either(${l},${r})`;
 }
 
 function Try(fn, msg) {
@@ -75,16 +72,41 @@ function Try(fn, msg) {
   }
 }
 
+// ES CORRECTO QUE TRY YA LLAME A fn() ??
+
+[
+  Container,
+  Functor,
+  Monad,
+  Nothing,
+  Just,
+  Maybe,
+  Either,
+  Right,
+  Left,
+  Try,
+].forEach((m) => (m.of = (...x) => new m(...x)));
+
 export {
   Container,
   Functor,
   Monad,
+  Nothing,
+  Just,
   Maybe,
   Either,
   Right,
   Left,
   Try,
 };
+
+const map = (fn) => (m) => m.map(fn);
+const chain = (fn) => (m) => m.chain(fn);
+const ap = (mf) => (m) => mf.ap(m);
+const orElse = (val) => (m) => m.orElse(val);
+const recover = (fn) => (m) => m.recover(fn);
+
+export {map,chain,ap,orElse,recover}
 
 // VER https://jrsinclair.com/articles/2016/marvellously-mysterious-javascript-maybe-monad/
 // HACER TODO CON FUNCIONES?

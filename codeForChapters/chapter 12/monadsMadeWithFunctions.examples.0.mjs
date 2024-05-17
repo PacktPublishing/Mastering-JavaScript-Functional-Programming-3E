@@ -3,6 +3,7 @@ import {
   Functor,
   Maybe,
   Monad,
+  Either,
   Right,
   Left,
   Try,
@@ -43,6 +44,17 @@ console.log(fnMon.ap(may1).toString()); // Just(2213)
 
 console.log(may2.orElse(44).toString());
 
+const mon4 = new Monad(
+  (x) => (y) => (z) => `${x}:${y}:${z}`
+);
+console.log(
+  mon4
+    .ap(new Monad(3))
+    .ap(new Monad(5))
+    .ap(new Monad(6))
+    .toString()
+); // Monad(3:5:6)
+
 const fakeCall = (n) =>
   n % 2 === 1
     ? new Right(n * 100)
@@ -70,7 +82,36 @@ const y = getField2("bbb")({
   bbb: 20,
   ccc: 30,
 }).map(plus1);
-console.log(y.toString()); // Either(21) <<<< FEO!!!
+console.log(y.toString()); // Either(null,21)
 console.log(y.isLeft()); // false
 
+console.log("*** OF ***");
+
+const vvv = Monad.of(36);
+const www = Either.of(null, 44);
+const xxx = Functor.of(19);
+console.log(vvv.toString());
+console.log(www.toString());
+console.log(xxx.toString());
+
 // PROBAR ALGO ASYNC !!
+
+/*
+const success = (time, value) =>
+  new Promise((resolve) =>
+    setTimeout(resolve, time, value)
+  );
+
+const failure = (time, reason) =>
+  new Promise((_, reject) =>
+    setTimeout(reject, time, reason)
+  );
+
+// ASYNC 1: la función se llama normalmente, y en el .then/.catch devuelve Right o Left
+
+// ASYNC 2: definir una TryAsync -- no anda, porque una func. async no puede ser constructor
+
+const fn2 = async () => {
+  return await success(1000, 220960);
+};
+*/
