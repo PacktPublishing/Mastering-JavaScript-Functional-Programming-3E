@@ -1,22 +1,33 @@
+// Algunos combinadores que podrían servir...
+const I = (x) => x; // Idiot bird AKA Identity
+const K = (x) => (y) => x; // Kestrel bird AKA Constant
+const A = (f) => (x) => f(x); // A  AKA Apply
+const T = (x) => (f) => f(x); // Thrush AKA ApplyTo (?)
+const B = (f) => (g) => (x) => f(g(x)); // Bluebird AKA Compose
+const V = (a) => (b) => (f) => f(a)(b); // Vireo AKA ...
+
 // MERITORIO: No tengo atributos (this.x, por ejemplo) que sean valores;
 // todos los atributos son funciones! (Y uso closures por todos lados...)
 
 function Container(x) {
-  this.toString = () => `${this.constructor.name}(${x})`;
-  this.valueOf = () => x;
-  this.map = (fn) => fn(x);
+  this.toString = K(`${this.constructor.name}(${x})`);
+  this.valueOf = K(x);
+  this.map = T(x);
 }
-Container.of = (x) => new Container(x);
 
-function Functor(x) {
+function FunctorFromContainer(x) {
   Container.call(this, x);
   this.map = (fn) => new this.constructor(fn(x));
 }
-Functor.of = (x) => new Functor(x);
+
+function Functor(x) {
+  this.toString = K(`${this.constructor.name}(${x})`);
+  this.valueOf = K(x);
+  this.map = (fn) => new this.constructor(fn(x));
+}
 
 // PROBABLEMENTE NO PRECISE RECURSIVIDAD -
 // SÓLO SACAR EL NIVEL DE AFUERA
-
 const unwrap = (z) => (z.chain ? unwrap(z.valueOf()) : z);
 
 function Monad(x) {
@@ -24,56 +35,48 @@ function Monad(x) {
   this.chain = (fn) => new this.constructor(unwrap(fn(x)));
   this.ap = (mon) => mon.map(x); // iff x is a function!
 }
-Monad.of = (x) => new Monad(x);
 
 function Nothing() {
   Monad.call(this);
-  this.toString = () => "Nothing()";
-  this.isNothing = () => true;
-  this.map = this.chain = this.ap = () => this;
-  this.orElse = (v) => new Maybe(v);
+  this.toString = K("Nothing()");
+  this.isNothing = K(true);
+  this.map = this.chain = this.ap = K(this);
+  this.orElse = Maybe.of;
 }
-Nothing.of = () => new Nothing();
 
 function Just(x) {
   Monad.call(this, x);
-  this.isNothing = () => false;
+  this.isNothing = K(false);
   this.map = (fn) => new Maybe(fn(x));
   this.chain = (fn) => new Maybe(unwrap(fn(x)));
-  this.orElse = () => this;
+  this.orElse = K(this);
 }
-Just.of = (x) => new Just(x);
 
 const isEmpty = (x) => x === null || x === undefined;
 
 function Maybe(x) {
   isEmpty(x) ? Nothing.call(this) : Just.call(this, x);
 }
-Maybe.of = (x) => new Maybe(x);
 
 function Left(x) {
   Monad.call(this, x);
-  this.isLeft = () => true;
-  this.map = this.chain = this.ap = () => this;
-  this.recover = (f) =>
-    new Either(null, typeof f === "function" ? f() : f);
+  this.isLeft = K(true);
+  this.map = this.chain = this.ap = K(this);
+  this.recover = (fn) => new Either(null, fn());
 }
-Left.of = (x) => new Left(x);
 
 function Right(x) {
   Monad.call(this, x);
-  this.isLeft = () => false;
+  this.isLeft = K(false);
   this.map = (fn) => new Either(null, fn(x));
   this.chain = (fn) => new Either(null, unwrap(fn(x)));
-  this.recover = () => this;
+  this.recover = K(this);
 }
-Right.of = (x) => new Right(x);
 
 function Either(l, r) {
   isEmpty(r) ? Left.call(this, l) : Right.call(this, r);
   this.toString = () => `Either(${l},${r})`;
 }
-Either.of = (x, y) => new Either(x, y);
 
 function Try(fn, msg) {
   try {
@@ -82,10 +85,26 @@ function Try(fn, msg) {
     Left.call(this, msg || e.message);
   }
 }
-Try.of = (fn, msg) => new Try(fn, msg);
+
+// ES CORRECTO QUE TRY YA LLAME A fn() ??
+
+[
+  Container,
+  FunctorFromContainer,
+  Functor,
+  Monad,
+  Nothing,
+  Just,
+  Maybe,
+  Either,
+  Right,
+  Left,
+  Try,
+].forEach((m) => (m.of = (...x) => new m(...x)));
 
 export {
   Container,
+  FunctorFromContainer,
   Functor,
   Monad,
   Nothing,
@@ -97,14 +116,11 @@ export {
   Try,
 };
 
-const curry = (fn) =>
-  fn.length ? (...x) => curry(fn.bind(null, ...x)) : fn();
-
-const map = curry((fn, m) => m.map(fn));
-const chain = curry((fn, m) => m.chain(fn));
-const ap = curry((mf, m) => mf.ap(m));
-const orElse = curry((val, m) => m.orElse(val));
-const recover = curry((fn, m) => m.recover(fn));
+const map = (fn) => (m) => m.map(fn);
+const chain = (fn) => (m) => m.chain(fn);
+const ap = (mf) => (m) => mf.ap(m);
+const orElse = (val) => (m) => m.orElse(val);
+const recover = (fn) => (m) => m.recover(fn);
 
 export { map, chain, ap, orElse, recover };
 

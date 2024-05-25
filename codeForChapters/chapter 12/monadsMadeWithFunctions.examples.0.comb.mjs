@@ -7,7 +7,7 @@ import {
   Right,
   Left,
   Try,
-} from "./monadsMadeWithFunctions.0.mjs";
+} from "./monadsMadeWithFunctions.0.comb.mjs";
 
 const cont1 = new Container(22);
 console.log(cont1.toString()); // Container(22)
@@ -47,7 +47,6 @@ console.log(may2.orElse(44).toString());
 const mon4 = new Monad(
   (x) => (y) => (z) => `${x}:${y}:${z}`
 );
-
 console.log(
   mon4
     .ap(new Monad(3))
