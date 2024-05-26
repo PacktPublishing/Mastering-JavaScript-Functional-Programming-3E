@@ -97,14 +97,28 @@ export {
   Try,
 };
 
+/*
+  Y qué de las promesas de JS?
+*/
+Promise.prototype.map = Promise.prototype.then;
+Promise.prototype.chain = Promise.prototype.then;
+Promise.prototype.ap = function (mon) {
+  return this.then(mon.map);
+};
+Promise.of = Promise.resolve;
+
+/*
+  Que todo sea funciones? OK!
+*/
 const curry = (fn) =>
   fn.length ? (...x) => curry(fn.bind(null, ...x)) : fn();
 
-const map = curry((fn, m) => m.map(fn));
-const chain = curry((fn, m) => m.chain(fn));
-const ap = curry((mf, m) => mf.ap(m));
-const orElse = curry((val, m) => m.orElse(val));
-const recover = curry((fn, m) => m.recover(fn));
+const map = curry((fn, mon) => mon.map(fn));
+const chain = curry((fn, mon) => mon.chain(fn));
+const ap = curry((mf, mon) => mf.ap(mon));
+
+const orElse = curry((val, mon) => mon.orElse(val));
+const recover = curry((fn, mon) => mon.recover(fn));
 
 export { map, chain, ap, orElse, recover };
 
