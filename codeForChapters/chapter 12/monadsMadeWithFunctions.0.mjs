@@ -1,5 +1,5 @@
-// MERITORIO: No tengo atributos (this.x, por ejemplo) que sean valores;
-// todos los atributos son funciones! (Y uso closures por todos lados...)
+// TO BE NOTED: We don't use attributes (this.x, for instance) that are
+// values; all attributes are functions, and closures are used for values.
 
 function Container(x) {
   this.toString = () => `${this.constructor.name}(${x})`;
@@ -13,9 +13,6 @@ function Functor(x) {
   this.map = (fn) => new this.constructor(fn(x));
 }
 Functor.of = (x) => new Functor(x);
-
-// PROBABLEMENTE NO PRECISE RECURSIVIDAD -
-// SÓLO SACAR EL NIVEL DE AFUERA
 
 const unwrap = (z) => (z.chain ? unwrap(z.valueOf()) : z);
 
@@ -84,21 +81,8 @@ function Try(fn, msg) {
 }
 Try.of = (fn, msg) => new Try(fn, msg);
 
-export {
-  Container,
-  Functor,
-  Monad,
-  Nothing,
-  Just,
-  Maybe,
-  Either,
-  Right,
-  Left,
-  Try,
-};
-
 /*
-  Y qué de las promesas de JS?
+  What about JS's own Promises?
 */
 Promise.prototype.map = Promise.prototype.then;
 Promise.prototype.chain = Promise.prototype.then;
@@ -108,7 +92,7 @@ Promise.prototype.ap = function (mon) {
 Promise.of = Promise.resolve;
 
 /*
-  Que todo sea funciones? OK!
+  What about using functions instead of methods?
 */
 const curry = (fn) =>
   fn.length ? (...x) => curry(fn.bind(null, ...x)) : fn();
@@ -120,7 +104,23 @@ const ap = curry((mf, mon) => mf.ap(mon));
 const orElse = curry((val, mon) => mon.orElse(val));
 const recover = curry((fn, mon) => mon.recover(fn));
 
-export { map, chain, ap, orElse, recover };
+export {
+  Container,
+  Functor,
+  Monad,
+  Nothing,
+  Just,
+  Maybe,
+  Either,
+  Right,
+  Left,
+  Try,
+  map,
+  chain,
+  ap,
+  orElse,
+  recover,
+};
 
 // VER https://jrsinclair.com/articles/2016/marvellously-mysterious-javascript-maybe-monad/
 // HACER TODO CON FUNCIONES?
