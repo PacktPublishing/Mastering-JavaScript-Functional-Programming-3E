@@ -1,9 +1,12 @@
 // TO BE NOTED: We don't use attributes (this.x, for instance) that are
 // values; all attributes are functions, and closures are used for values.
 
+// Using the K (constant) combinator would simplify coding
+
+const K = (v) => () => v;
 function Container(x) {
-  this.toString = () => `${this.constructor.name}(${x})`;
-  this.valueOf = () => x;
+  this.toString = K(`${this.constructor.name}(${x})`);
+  this.valueOf = K(x);
   this.map = (fn) => fn(x);
 }
 Container.of = (x) => new Container(x);
@@ -25,19 +28,23 @@ Monad.of = (x) => new Monad(x);
 
 function Nothing() {
   Monad.call(this);
-  this.toString = () => "Nothing()";
-  this.isNothing = () => true;
-  this.map = this.chain = this.ap = () => this;
+  this.toString = K("Nothing()");
+  this.isNothing = K(true);
+  this.map = K(this);
+  this.filter = K(this);
+  this.chain = K(this);
+  this.ap = K(this);
   this.orElse = (v) => new Maybe(v);
 }
 Nothing.of = () => new Nothing();
 
 function Just(x) {
   Monad.call(this, x);
-  this.isNothing = () => false;
+  this.isNothing = K(false);
   this.map = (fn) => new Maybe(fn(x));
+  this.filter = (fn) => (fn(x) ? this : Nothing.of());
   this.chain = (fn) => new Maybe(unwrap(fn(x)));
-  this.orElse = () => this;
+  this.orElse = K(this);
 }
 Just.of = (x) => new Just(x);
 
@@ -50,19 +57,20 @@ Maybe.of = (x) => new Maybe(x);
 
 function Left(x) {
   Monad.call(this, x);
-  this.isLeft = () => true;
-  this.map = this.chain = this.ap = () => this;
-  this.recover = (f) =>
-    new Either(null, typeof f === "function" ? f() : f);
+  this.isLeft = K(true);
+  this.map = K(this);
+  this.chain = K(this);
+  this.ap = K(this);
+  this.recover = (fn) => Either.of(null, fn());
 }
 Left.of = (x) => new Left(x);
 
 function Right(x) {
   Monad.call(this, x);
-  this.isLeft = () => false;
+  this.isLeft = K(false);
   this.map = (fn) => new Either(null, fn(x));
   this.chain = (fn) => new Either(null, unwrap(fn(x)));
-  this.recover = () => this;
+  this.recover = K(this);
 }
 Right.of = (x) => new Right(x);
 
@@ -98,6 +106,7 @@ const curry = (fn) =>
   fn.length ? (...x) => curry(fn.bind(null, ...x)) : fn();
 
 const map = curry((fn, mon) => mon.map(fn));
+const filter = curry((fn, mon) => mon.filter(fn)); // for Maybe, only!
 const chain = curry((fn, mon) => mon.chain(fn));
 const ap = curry((mf, mon) => mf.ap(mon));
 
@@ -116,6 +125,7 @@ export {
   Left,
   Try,
   map,
+  filter,
   chain,
   ap,
   orElse,
@@ -123,4 +133,9 @@ export {
 };
 
 // VER https://jrsinclair.com/articles/2016/marvellously-mysterious-javascript-maybe-monad/
-// HACER TODO CON FUNCIONES?
+// Promises are not monads? https://stackoverflow.com/questions/45712106/why-are-promises-monads
+// On using monads: https://tomasp.net/academic/papers/monads/monads-programming.pdf
+/*
+  First metaphor: Monad as a container
+  Second metaphor: Monad as a computation
+*/

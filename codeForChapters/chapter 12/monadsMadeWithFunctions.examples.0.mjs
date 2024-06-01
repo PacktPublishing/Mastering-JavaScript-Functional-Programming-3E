@@ -38,6 +38,9 @@ const may1 = new Maybe(2209).map(plus1).map(plus1);
 console.log(may1.toString()); // Just(2211)
 console.log(may1.map(() => null).toString()); // Nothing()
 
+console.log(may1.filter((x) => x > 10).toString()); // Just(2211)
+console.log(may1.filter((x) => x > 10000).toString()); // Nothing()
+
 const may2 = new Maybe(null).map(plus1).map(plus1);
 console.log(may2.toString()); // Nothing()
 console.log(fnMon.ap(may1).toString()); // Just(2213)
