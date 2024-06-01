@@ -1,7 +1,7 @@
 // TO BE NOTED: We don't use attributes (this.x, for instance) that are
 // values; all attributes are functions, and closures are used for values.
 
-// Using the K (constant) combinator would simplify coding
+// Using the K (constant) combinator simplifies coding
 
 const K = (v) => () => v;
 function Container(x) {
