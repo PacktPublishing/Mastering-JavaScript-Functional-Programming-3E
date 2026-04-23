@@ -18,10 +18,10 @@ const calculateDebt = async (id) => {
 
 const calculateDebt2 = async (
   id,
-  { getInvoices, getOwedAmounts } = {
+  [ getInvoices, getOwedAmounts ] = [
     getInvoicesFromDb,
     getOwedAmountFromAPI,
-  }
+  ]
 ) => {
   const listOfInvoices = await getInvoices(id);
   const owedAmounts = await getOwedAmounts(listOfInvoices);
